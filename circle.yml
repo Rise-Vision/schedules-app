@@ -1,0 +1,50 @@
+general:
+  artifacts:
+    - dist.tar.gz
+dependencies:
+  pre:
+    - curl -L -o google-chrome-stable.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    - sudo dpkg -i google-chrome-stable.deb
+    - sudo sed -i 's|HERE/chrome\"|HERE/chrome\" --disable-setuid-sandbox|g' /opt/google/chrome/google-chrome
+    - rm google-chrome-stable.deb
+    - curl -L -o chromedriver.zip "https://chromedriver.storage.googleapis.com/2.12/chromedriver_linux64.zip"
+    - unzip -p chromedriver.zip | sudo tee /usr/local/bin/chromedriver >> /dev/null
+    - sudo chmod +x "/usr/local/bin/chromedriver"
+  override:
+    - npm install
+    - bower install
+  post:
+    - wget http://selenium-release.storage.googleapis.com/2.44/selenium-server-standalone-2.44.0.jar
+    - nohup bash -c "java -jar selenium-server-standalone-2.44.0.jar &"
+test:
+  override:
+    - echo $CHROME_INSTANCES
+    - npm run test
+deployment:
+  staging:
+    branch: /(feature|fix|chore).*/
+    commands:
+      - echo $CI_PULL_REQUEST
+      # We have 3 stage environments, schedules-stage-0.risevision.com, schedules-stage-1.risevision.com and schedules-stage-2.risevision.com.
+      # To deploy to one of these environments a tag must be added to the commit message. For instance, [stage-0] for schedules-stage-0.risevision.com.
+      # The build will fail if the tag is not added.
+      - if [ "$(git log -1 --pretty=%B | grep '\[.*\]' |sed -e 's/.*\[\(.*\)\].*/\1/g')" == '' ]; then echo "stage deployment environment missing. Add a tag such as [stage-0] to the commit message."; exit 1; fi
+      - NODE_ENV=test npm run build
+      - echo "deploying to $(git log -1 --pretty=%B | grep '\[.*\]' |sed -e 's/.*\[\(.*\)\].*/\1/g')";
+      - ssh schedules@webserver-stage.risevision.com 'mkdir -p /rise-front-end/schedules';
+      - rsync -rptz -e ssh --delete dist schedules@webserver-stage.risevision.com:/rise-front-end/schedules/$(git log -1 --pretty=%B | grep '\[.*\]' |sed -e 's/.*\[\(.*\)\].*/\1/g')
+      - tar czvf dist.tar.gz dist
+  production:
+    branch: master
+    owner: Rise-Vision
+    commands:
+      - NODE_ENV=prod npm run build
+      # It deploys first to production server 2.
+      - echo "deploying to production webserver1.risevision.com";
+      - ssh schedules@webserver1.risevision.com 'mkdir -p /rise-front-end/schedules';
+      - rsync -rptz -e ssh --delete dist schedules@webserver1.risevision.com:/rise-front-end/schedules;
+      # It then deploys to production server 1.
+      - echo "deploying to production webserver.risevision.com";
+      - ssh schedules@webserver.risevision.com 'mkdir -p /rise-front-end/schedules';
+      - rsync -rptz -e ssh --delete dist schedules@webserver.risevision.com:/rise-front-end/schedules;
+      - tar czvf dist.tar.gz dist

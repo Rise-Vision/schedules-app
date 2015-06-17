@@ -1,0 +1,7 @@
+<div class="form-group" ng-class="{'has-error': !scheduleDetails.name.$pristine && scheduleDetails.name.$invalid}" show-errors>
+  <label class="control-label">{{'schedules-app.fields.name.name' | translate}} *</label>
+  <input type="text" class="form-control" placeholder="Schedule Name" id="name" name="name" ng-model="schedule.name" required focus-me="!scheduleId">
+  <p class="text-danger" ng-show="!scheduleDetails.name.$pristine && scheduleDetails.name.$error.required" translate>
+    schedules-app.fields.name.required
+  </p>
+</div>

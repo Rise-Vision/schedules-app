@@ -1,0 +1,48 @@
+<div class="app-header">
+  <div class="title-block">
+    <!-- App Title -->
+    <h1 translate>schedules-app.title</h1>
+  </div>
+
+  <div class="global-actions">
+    <button ng-click="addSchedule()"
+      class="btn btn-lg btn-primary">     
+      {{ 'schedules-app.actions.new' | translate }}
+      <i class="fa fa-plus icon-right"></i> 
+    </button>
+  </div>
+</div>
+
+<div rv-spinner rv-spinner-key="schedule-loader" rv-spinner-start-active="0"></div>
+
+<div>
+  <form role="form" name="scheduleDetails">
+    
+    <schedule-fields></schedule-fields>
+
+    <div ng-show="submitError" class="alert alert-danger" role="alert">
+      <strong translate>schedules-app.details.error </strong>{{submitError}}
+    </div> 
+    
+    <div class="button-row">
+      <p class="visible-xs text-right"><last-modified change-date="schedule.changeDate" changed-by="schedule.changedBy"></last-modified></p>
+      <!-- Indicates delete or destructive action -->
+      <button id="deleteButton" type="button" class="btn btn-danger btn-fixed-width" ng-click="confirmDelete()" ng-if="scheduleId">
+        {{'common.delete' | translate}} <i class="fa fa-white fa-trash-o icon-right"></i>
+      </button>
+      <div class="pull-right">
+      <span class="hidden-xs add-right"><last-modified change-date="schedule.changeDate" changed-by="schedule.changedBy"></last-modified></span>
+        <!-- Indicates a successful or positive action -->
+        <button type="submit" class="btn btn-primary btn-fixed-width" ng-click="save()" ng-disabled="scheduleDetails.$invalid || savingSchedule">
+          {{ savingSchedule ? ('common.saving' | translate) : ('common.save' | translate)}} 
+          <i class="fa fa-check icon-right"></i>
+        </button>
+        <!-- Indicates cancel or non-destructive action -->
+        <button ui-sref="schedule.list" class="btn btn-default btn-fixed-width">
+          {{'common.cancel' | translate}}
+          <i class="fa fa-times icon-right"></i>
+        </button>
+      </div>
+    </div>
+  </form><!-- ticketDetails -->
+</div><!--container-->

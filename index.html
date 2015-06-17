@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html ng-app="risevision.schedulesApp" itemscope itemtype="http://schema.org/Product">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <link rel="shortcut icon" href="http://s3.amazonaws.com/Rise-Images/favicons/schedules_favicon.ico" />
+    <meta name="google-site-verification" content="TO2kG46s9wDLSVLPOZE0SUjLJoOzU4OxroBYzaNZLeA" />
+
+    <link rel="canonical" href="https://schedules.risevision.com/" itemprop="url">
+    <!-- *** Schedules App Meta *** -->
+    <title itemprop='name'>Rise Vision Schedules | Digital Signage Network Management</title>
+    <meta name="description" content="Schedules is where you can add, remove, configure any schedule in your network" />
+
+    <!-- Schema.org markup for Google+ -->
+    <meta itemprop="name" content="Rise Vision Schedules">
+    <meta itemprop="description" content="Schedules is where you can add, remove, configure any schedule in your network">
+    <meta itemprop="image" content="https://s3.amazonaws.com/Store-Products/Meta/schedules.png">
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="product">
+    <meta name="twitter:site" content="@RiseVision">
+    <meta name="twitter:title" content="Rise Vision Schedules">
+    <meta name="twitter:description" content="Schedules is where you can add, remove, configure any schedule in your network">
+    <meta name="twitter:image:src" content="https://s3.amazonaws.com/Store-Products/Meta/schedules.png">
+    <meta name="twitter:data1" content="Free">
+    <meta name="twitter:label1" content="Price">
+    <meta name="twitter:data2" content="Rise Vision">
+    <meta name="twitter:label2" content="Provided by">
+    <meta name="twitter:url" content="https://schedules.risevision.com/" />
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="Rise Vision Schedules" />
+    <meta property="og:type" content="product" />
+    <meta property="og:url" content="https://schedules.risevision.com/" />
+    <meta property="og:image" content="https://s3.amazonaws.com/Store-Products/Meta/schedules.png" />
+    <meta property="og:description" content="Schedules is where you can add, remove, configure any schedule in your network" />
+
+    <!-- app css -->
+    <!-- build:css css/ea.min.css -->
+    <link href="bower_components/rv-common-style/dist/css/rise.min.css" rel="stylesheet" type="text/css">
+    <!-- endbuild -->
+  </head>
+
+  <body>
+    <!-- Common Header -->
+    <common-header nav-options="navOptions" nav-selected="navSelected" ng-controller="AppCtrl"></common-header>
+    <!-- Main View -->
+    <div class="container">
+      <div
+        class="schedules-app"
+        ui-view
+        off-canvas-content>
+      </div>
+    </div>
+
+    <!-- build:js js/schedules.min.js -->
+    <script src="bower_components/common-header/dist/js/dependencies.js"></script>
+    <script src="bower_components/angular-bootstrap-show-errors/src/showErrors.min.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
+    <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+
+    <script src="bower_components/common-header/dist/js/common-header.js"></script>
+    <script src="bower_components/rv-common-app-components/dist/js/search-filter.js"></script>
+    <script src="bower_components/rv-common-app-components/dist/js/focus-me.js"></script>
+    <script src="bower_components/rv-loading/loading.js"></script>
+    <script src="bower_components/rv-common-i18n/dist/i18n.js"></script>
+
+    <script src="js/config/config.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers/ctr-app.js"></script>
+    <script src="js/services/svc-access.js"></script>
+    <script src="js/services/svc-schedule.js"></script>
+    <script src="js/services/svc-schedule-tracker.js"></script>
+        
+    <script src="js/directives/dtv-schedule-fields.js"></script>
+    <script src="js/controllers/ctr-confirm-instance.js"></script>
+    <script src="js/controllers/ctr-schedules-list.js"></script>
+    <script src="js/controllers/ctr-schedule-details.js"></script>
+    <script src="js/controllers/ctr-schedule-add.js"></script>
+    <!-- endbuild -->
+    
+  </body>
+</html>

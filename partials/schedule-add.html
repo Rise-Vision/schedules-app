@@ -1,0 +1,34 @@
+<div class="app-header">
+  <div class="title-block">
+    <!-- App Title -->
+    <h1 id="title" translate>schedules-app.title</h1>
+  </div>
+</div>
+
+<div rv-spinner rv-spinner-key="schedule-loader" rv-spinner-start-active="0"></div>
+
+<div>
+  <form role="form" name="scheduleDetails">
+    
+    <schedule-fields></schedule-fields>
+    
+    <div ng-show="submitError" class="alert alert-danger" role="alert">
+      <strong translate>schedules-app.add.error </strong>{{submitError}}
+    </div> 
+
+    <div class="pull-right">      
+      <div class="button-row">
+        <!-- Indicates a successful or positive action -->
+        <button id="saveButton" type="submit" class="btn btn-primary btn-fixed-width" ng-click="save()" ng-disabled="scheduleDetails.$invalid || savingSchedule">
+          {{ savingSchedule ? ('common.saving' | translate) : ('common.save' | translate)}} 
+          <i class="fa fa-check icon-right"></i>
+        </button>
+        <!-- Indicates cancel or non-destructive action -->
+        <button id="cancelButton"  ui-sref="schedule.list" class="btn btn-default btn-fixed-width">
+          {{'common.cancel' | translate}}
+          <i class="fa fa-times icon-right"></i>
+        </button>
+      </div>
+    </div>
+  </form><!-- scheduleDetails -->
+</div><!--container-->
