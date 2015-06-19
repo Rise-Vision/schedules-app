@@ -1,10 +1,10 @@
 'use strict';
-var expect = require('./common/expect.js');
+var expect = require('rv-common-e2e').expect;
 var HomePage = require('./pages/homepage.js');
-var CommonHeaderPage = require('./pages/commonheaderpage.js');
+var CommonHeaderPage = require('rv-common-e2e').commonHeaderPage;
 var SchedulesListPage = require('./pages/schedulesListPage.js');
 var ScheduleAddPage = require('./pages/scheduleAddPage.js');
-var helper = require('./common/helper.js');
+var helper = require('rv-common-e2e').helper;
 
 browser.driver.manage().window().setSize(1024, 768);
 describe("In order to manage schedules " +
@@ -16,7 +16,7 @@ describe("In order to manage schedules " +
   var schedulesListPage;
   var scheduleAddPage;
 
-  beforeEach(function (){
+  before(function (){
     homepage = new HomePage();
     schedulesListPage = new SchedulesListPage();
     scheduleAddPage = new ScheduleAddPage();
@@ -49,5 +49,12 @@ describe("In order to manage schedules " +
     scheduleAddPage.getSaveButton().click();
     helper.wait(scheduleAddPage.getDeleteButton(), 'Delete Button');
     expect(scheduleAddPage.getDeleteButton().isDisplayed()).to.eventually.be.true;
+  });
+
+  after(function() {
+    helper.clickWhenClickable(scheduleAddPage.getDeleteButton(), "Display Delete Button").then(function () {
+      helper.clickWhenClickable(scheduleAddPage.getDeleteForeverButton(), "Display Delete Forever Button").then(function () {
+      });
+    });
   });
 });

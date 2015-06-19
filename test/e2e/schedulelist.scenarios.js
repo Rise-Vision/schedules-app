@@ -1,7 +1,7 @@
 'use strict';
-var expect = require('./common/expect.js');
+var expect = require('rv-common-e2e').expect;
 var HomePage = require('./pages/homepage.js');
-var CommonHeaderPage = require('./pages/commonheaderpage.js');
+var CommonHeaderPage = require('rv-common-e2e').commonHeaderPage;
 var SchedulesListPage = require('./pages/schedulesListPage.js');
 
 browser.driver.manage().window().setSize(1024, 768);
@@ -13,7 +13,7 @@ describe("In order to manage schedules " +
   var commonHeaderPage;
   var schedulesListPage;
 
-  beforeEach(function (){
+  before(function (){
     homepage = new HomePage();
     schedulesListPage = new SchedulesListPage();
     commonHeaderPage = new CommonHeaderPage();

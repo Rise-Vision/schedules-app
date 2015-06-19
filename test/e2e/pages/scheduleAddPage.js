@@ -9,6 +9,8 @@ var ScheduleAddPage = function() {
 
   var deleteButton = element(by.id('deleteButton'));
 
+  var deleteForeverButton = element(by.buttonText('Delete Forever'));
+
   this.getSchedulesAppContainer = function() {
     return displaysAppContainer;
   };
@@ -31,6 +33,10 @@ var ScheduleAddPage = function() {
 
   this.getDeleteButton = function() {
     return deleteButton;
+  };
+
+  this.getDeleteForeverButton = function() {
+    return deleteForeverButton;
   };
 };
 
