@@ -9,6 +9,7 @@ angular.module('risevision.schedulesApp', [
   'risevision.common.components.scrolling-list',
   'risevision.common.components.focus-me',
   'risevision.common.components.confirm-instance',
+  'risevision.widget.common.storage-selector',
   'ngTouch',
   'ui.bootstrap',
   'ui.bootstrap.showErrors',

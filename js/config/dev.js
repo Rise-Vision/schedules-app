@@ -22,4 +22,8 @@
       'https://storage-dot-rvacore-test.appspot.com/_ah/api')
     .value('CORE_URL', 'https://rvacore-test.appspot.com/_ah/api'); // override default core value
 
+  angular.module('risevision.widget.common.storage-selector.config')
+    .value('STORAGE_MODAL',
+      'https://storage-stage-rva-test.risevision.com/files/');
+
 })(angular);
