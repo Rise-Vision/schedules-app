@@ -1,7 +1,7 @@
 'use strict';
-var expect = require('./common/expect.js');
+var expect = require('rv-common-e2e').expect;
 var HomePage = require('./pages/homepage.js');
-var CommonHeaderPage = require('./pages/commonheaderpage.js');
+var CommonHeaderPage = require('rv-common-e2e').commonHeaderPage;
 
 browser.driver.manage().window().setSize(1024, 768);
 describe("In order to manage schedules " +
@@ -10,7 +10,7 @@ describe("In order to manage schedules " +
   this.timeout(2000);// to allow for protactor to load the seperate page
   var homepage;
   var commonHeaderPage;
-  beforeEach(function (){
+  before(function (){
     homepage = new HomePage();
     commonHeaderPage = new CommonHeaderPage();
     homepage.get();
@@ -29,12 +29,12 @@ describe("In order to manage schedules " +
   });
 
   it('should have a schedule menu item on the common header',function(){
-   expect(commonHeaderPage.getScheduleMenuItem().isPresent()).to.eventually.be.true;
-   expect(commonHeaderPage.getScheduleMenuItem().getText()).to.eventually.equal('Schedules');
+   expect(commonHeaderPage.getCommonHeaderMenuItems().get(0).isPresent()).to.eventually.be.true;
+   expect(commonHeaderPage.getCommonHeaderMenuItems().get(0).getText()).to.eventually.equal('Schedules');
   });
 
   it('should go to home when clicking on Schedules menu item',function(){
-    commonHeaderPage.getScheduleMenuItem().click();
+    commonHeaderPage.getCommonHeaderMenuItems().get(0).click();
     expect(browser.getCurrentUrl()).to.eventually.equal(homepage.getUrl());
   });
 

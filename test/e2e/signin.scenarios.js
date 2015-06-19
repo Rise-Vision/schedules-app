@@ -1,12 +1,9 @@
-/**
- * Created by rodrigopavezi on 6/5/15.
- */
 'use strict';
-var expect = require('./common/expect.js');
+var expect = require('rv-common-e2e').expect;
 var HomePage = require('./pages/homepage.js');
-var CommonHeaderPage = require('./pages/commonheaderpage.js');
+var CommonHeaderPage = require('rv-common-e2e').commonHeaderPage;
 var SchedulesListPage = require('./pages/schedulesListPage.js');
-var helper = require('./common/helper.js');
+
 browser.driver.manage().window().setSize(1024, 768);
 describe("In order to manage schedules " +
          "As a user " +
@@ -15,7 +12,7 @@ describe("In order to manage schedules " +
   var homepage;
   var commonHeaderPage;
   var schedulesListPage;
-  beforeEach(function (){
+  before(function (){
     homepage = new HomePage();
     commonHeaderPage = new CommonHeaderPage();
     schedulesListPage = new SchedulesListPage();
