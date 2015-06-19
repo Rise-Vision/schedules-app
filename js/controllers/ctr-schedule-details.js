@@ -2,9 +2,10 @@
 
 angular.module('risevision.schedulesApp.controllers')
   .controller('scheduleDetails', ['$scope', '$q', '$state', '$stateParams',
-    'schedule', '$loading', '$modal', '$log', 'scheduleTracker',
+    'schedule', '$loading', '$modal', '$log', '$templateCache', 
+    'scheduleTracker',
     function ($scope, $q, $state, $stateParams, schedule,
-      $loading, $modal, $log, scheduleTracker) {
+      $loading, $modal, $log, $templateCache, scheduleTracker) {
       $scope.scheduleId = $stateParams.scheduleId;
       $scope.savingSchedule = false;
 
@@ -61,7 +62,7 @@ angular.module('risevision.schedulesApp.controllers')
 
       $scope.confirmDelete = function () {
         $scope.modalInstance = $modal.open({
-          templateUrl: 'partials/confirm-modal.html',
+          template: $templateCache.get('confirm-instance/confirm-modal.html'),
           controller: 'confirmInstance',
           windowClass: 'modal-custom',
           resolve: {
@@ -91,7 +92,7 @@ angular.module('risevision.schedulesApp.controllers')
           $state.go('schedule.add');
         } else {
           $scope.modalInstance = $modal.open({
-            templateUrl: 'partials/confirm-modal.html',
+            template: $templateCache.get('confirm-instance/confirm-modal.html'),
             controller: 'confirmInstance',
             windowClass: 'modal-custom',
             resolve: {
