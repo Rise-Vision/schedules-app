@@ -13,7 +13,7 @@ angular.module('risevision.schedulesApp.controllers')
       $scope.add = function () {
         $rootScope.$broadcast('risevision.schedules.new-item',
           TYPE_URL, $scope.url);
-          
+
         $modalInstance.close();
       };
 

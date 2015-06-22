@@ -27,14 +27,14 @@
     <div class="button-row">
       <p class="visible-xs text-right"><last-modified change-date="schedule.changeDate" changed-by="schedule.changedBy"></last-modified></p>
       <!-- Indicates delete or destructive action -->
-      <button id="deleteButton" type="button" class="btn btn-danger btn-fixed-width" ng-click="confirmDelete()" ng-if="scheduleId">
+      <button id="deleteButton" type="button" class="btn btn-danger btn-fixed-width" ng-click="confirmDelete()">
         {{'common.delete' | translate}} <i class="fa fa-white fa-trash-o icon-right"></i>
       </button>
       <div class="pull-right">
       <span class="hidden-xs add-right"><last-modified change-date="schedule.changeDate" changed-by="schedule.changedBy"></last-modified></span>
         <!-- Indicates a successful or positive action -->
-        <button type="submit" class="btn btn-primary btn-fixed-width" ng-click="save()" ng-disabled="scheduleDetails.$invalid || savingSchedule">
-          {{ savingSchedule ? ('common.saving' | translate) : ('common.save' | translate)}} 
+        <button type="submit" class="btn btn-primary btn-fixed-width" ng-click="save()" ng-disabled="scheduleDetails.$invalid || factory.savingSchedule">
+          {{ factory.savingSchedule ? ('common.saving' | translate) : ('common.save' | translate)}} 
           <i class="fa fa-check icon-right"></i>
         </button>
         <!-- Indicates cancel or non-destructive action -->

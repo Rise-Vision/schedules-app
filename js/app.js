@@ -65,9 +65,13 @@ angular.module('risevision.schedulesApp', [
       templateUrl: 'partials/schedule-details.html',
       controller: 'scheduleDetails',
       resolve: {
-        canAccessSchedules: ['canAccessSchedules',
-          function (canAccessSchedules) {
-            return canAccessSchedules();
+        scheduleInfo: ['canAccessSchedules', 'scheduleFactory',
+          '$stateParams',
+          function (canAccessSchedules, scheduleFactory, $stateParams) {
+            return canAccessSchedules().then(function () {
+              //load the schedule based on the url param
+              return scheduleFactory.getSchedule($stateParams.scheduleId);
+            });
           }
         ]
       }
@@ -78,9 +82,9 @@ angular.module('risevision.schedulesApp', [
       templateUrl: 'partials/schedule-add.html',
       controller: 'scheduleAdd',
       resolve: {
-        canAccessSchedules: ['canAccessSchedules',
-          function (canAccessSchedules) {
-            return canAccessSchedules();
+        scheduleInfo: ['canAccessSchedules', 'scheduleFactory',
+          function (canAccessSchedules, scheduleFactory) {
+            return canAccessSchedules().then(scheduleFactory.newSchedule);
           }
         ]
       }

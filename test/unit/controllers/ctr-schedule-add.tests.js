@@ -4,32 +4,14 @@ describe('controller: schedule add', function() {
   beforeEach(module('risevision.schedulesApp.controllers'));
   beforeEach(module('risevision.schedulesApp.services'));
   beforeEach(module(function ($provide) {
-    $provide.service('userState',userState);
-    $provide.service('schedule',function(){
+    $provide.service('scheduleFactory',function(){
       return {
-        _schedule: {},
-        add : function(schedule){
-          var deferred = Q.defer();
-          if(updateSchedule){
-            this._schedule = schedule;
-            deferred.resolve({item: schedule});
-          }else{
-            deferred.reject('ERROR; could not create schedule');
-          }
-          return deferred.promise;
+        schedule: {},
+        loadingSchedule: true,
+        addSchedule : function(){
+          scheduleAdded = true;
         }
-      }
-    });
-    $provide.service('$state',function(){
-      return {
-        _state : '',
-        go : function(state, params){
-          if (state){
-            this._state = state;
-          }
-          return this._state;
-        }
-      }
+      };
     });
     $provide.service('$loading',function(){
       return {
@@ -41,44 +23,24 @@ describe('controller: schedule add', function() {
         }
       }
     });
-    $provide.service('scheduleTracker', function() { 
-      return function(name) {
-        trackerCalled = name;
-      };
-    });
 
   }));
-  var $scope, userState, $state, updateSchedule,$loading,$loadingStartSpy, $loadingStopSpy,
-  trackerCalled;
+  var $scope, scheduleFactory, $loading,$loadingStartSpy, $loadingStopSpy, scheduleAdded;
   beforeEach(function(){
-    updateSchedule = true;
-    trackerCalled = undefined;
+    scheduleAdded = false;
     
-    userState = function(){
-      return {
-        getSelectedCompanyId : function(){
-          return 'some_company_id';
-        },
-        _restoreState : function(){
-
-        },
-        isSubcompanySelected : function(){
-          return true;
-        }
-      }
-    };
     inject(function($injector,$rootScope, $controller){
       $scope = $rootScope.$new();
-      $state = $injector.get('$state');
+      scheduleFactory = $injector.get('scheduleFactory');
       $loading = $injector.get('$loading');
       $loadingStartSpy = sinon.spy($loading, 'start');
       $loadingStopSpy = sinon.spy($loading, 'stop');
       $controller('scheduleAdd', {
         $scope : $scope,
-        $state : $state,
-        schedule: $injector.get('schedule'),
+        scheduleFactory: scheduleFactory,
         $loading: $loading,
-        $log : $injector.get('$log')});
+        $log: $injector.get('$log')
+      });
       $scope.$digest();
     });
   });
@@ -100,40 +62,24 @@ describe('controller: schedule add', function() {
     $scope.save();
   });
 
-  it('should save the schedule',function(done){
-    updateSchedule = true;
-
+  it('should save the schedule',function(){
     $scope.scheduleDetails = {};
     $scope.scheduleDetails.$valid = true;
     $scope.schedule = {id:123};
     $scope.save();
-    expect($scope.savingSchedule).to.be.true;
-    $scope.$digest();
-    $loadingStartSpy.should.have.been.calledWith('schedules-loader');
-    setTimeout(function(){
-      expect($state._state).to.equal('schedule.details');
-      expect(trackerCalled).to.equal('Schedule Created');
-      expect($scope.savingSchedule).to.be.false;
-      expect($state.submitError).to.not.be.ok;
-      $loadingStopSpy.should.have.been.calledWith('schedules-loader');
-      done();
-    },10);
+    
+    expect(scheduleAdded).to.be.true;
   });
 
-  it('should show an error if fails to create schedule',function(done){
-    updateSchedule = false;
-
+  it('should show/hide loading spinner if loading', function(done) {
     $scope.$digest();
-    $scope.scheduleDetails = {};
-    $scope.scheduleDetails.$valid = true;
-    $scope.save();
+    $loadingStartSpy.should.have.been.calledWith('schedule-loader');
+
+    scheduleFactory.loadingSchedule = false;
+    $scope.$digest();
     setTimeout(function(){
-      expect($state._state).to.be.empty;
-      expect(trackerCalled).to.not.be.ok;
-      expect($scope.savingSchedule).to.be.false;
-      expect($scope.submitError).to.be.ok;
+      $loadingStopSpy.should.have.been.calledWith('schedule-loader');
       done();
     },10);
-  });
-
+  })
 });
