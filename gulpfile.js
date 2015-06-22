@@ -152,7 +152,8 @@ gulp.task("test:webdrive_update", factory.webdriveUpdate());
 gulp.task("test:e2e:core", ["test:webdrive_update"], factory.testE2EAngular({
   browser: "chrome",
   loginUser: process.env.E2E_USER,
-  loginPass: process.env.E2E_PASS
+  loginPass: process.env.E2E_PASS,
+  testFiles: process.env.TEST_FILES
 }));
 gulp.task("test:e2e", function (cb) {
   runSequence("config-e2e","server", "test:e2e:core", "server-close", cb);
