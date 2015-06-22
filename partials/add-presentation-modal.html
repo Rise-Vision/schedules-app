@@ -1,0 +1,32 @@
+<div class="modal-header">
+  <button type="button" class="close" ng-click="dismiss()" aria-hidden="true">
+    <i class="fa fa-times"></i>
+  </button>
+  <h3 class="modal-title">Add Playlist Presentation</h3>
+</div>
+<div class="modal-body">
+
+  <div class="input-group add-bottom">
+    <span class="input-group-addon"><i class="fa fa-search fa-lg"></i></span>
+    <input type="text" class="form-control" placeholder="Search Presentations">
+  </div>
+
+  <div class="content-box scrollable-list">
+    <table class="table-2 table-hover table-selector single-selector">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th class="text-right">Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr data-ng-click="toggleObject.item = $index" data-ng-class="{'active' : toggleObject.item == $index}" ng-repeat="presentation in presentations">
+          <td>Presentation</td>
+          <td class="text-right">Published</td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+</div>
