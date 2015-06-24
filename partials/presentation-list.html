@@ -5,7 +5,7 @@
   <div class="content-box list-group scrollable-list auto-height" scrolling-list="load()"
        rv-spinner rv-spinner-key="presentation-list-loader"
        rv-spinner-start-active="1">
-    <table id="presentationListTable" class="table-2 table-hover table-selector single-selector">
+    <table id="presentationListTable" class="table-2 table-hover">
       <thead>
       <tr>
         <th id="tableHeaderName" ng-click="sortBy('name')">
@@ -23,7 +23,7 @@
       <tbody>
       <tr data-ng-click="toggleObject.item = $index; select(presentation.id, presentation.name);" data-ng-class="{'active' : toggleObject.item == $index}" ng-repeat="presentation in presentations.list">
         <td>{{presentation.name}}</td>
-        <td class="text-right">{{presentation.revisionStatus | presentationStatus}}</td>
+        <td class="text-right"><span ng-class="{'text-danger': presentation.revisionStatus==1}">{{presentation.revisionStatus | presentationStatus}}</span></td>
       </tr>
       </tbody>
 
