@@ -13,23 +13,30 @@ describe('controller: Add Presentation Modal', function() {
         }
       }
     });
-   $provide.value('TYPE_PRESENTATION', 'presentation');
+    $provide.service('scheduleFactory',function(){
+      return {
+        updatePlaylistItem : function(){
+          itemUpdated = true;
+        }
+      }
+    });
+    $provide.value('playlistItem', {});
   }));
-  var $scope, $rootScope, $modalInstance, $modalInstanceCloseSpy, $broadcastSpy, TYPE_PRESENTATION;
+  var $scope, $rootScope, $modalInstance, $modalInstanceCloseSpy, itemUpdated;
   beforeEach(function(){
-
+    itemUpdated = false;
+    
     inject(function($injector,_$rootScope_, $controller){
       $rootScope = _$rootScope_;
       $scope = $rootScope.$new();
       $modalInstance = $injector.get('$modalInstance');
       $modalInstanceCloseSpy = sinon.spy($modalInstance, 'close');
-      $broadcastSpy = sinon.spy($rootScope, '$broadcast');
-      TYPE_PRESENTATION = $injector.get('TYPE_PRESENTATION');
-      $controller('addPresentationModal', {
+      $controller('editPresentationModal', {
         $scope : $scope,
         $rootScope: $rootScope,
         $modalInstance : $modalInstance,
-        TYPE_PRESENTATION: TYPE_PRESENTATION
+        scheduleFactory: $injector.get('scheduleFactory'),
+        playlistItem: $injector.get('playlistItem')
       });
       $scope.$digest();
     });
@@ -38,8 +45,9 @@ describe('controller: Add Presentation Modal', function() {
   it('should exist',function(){
     expect($scope).to.be.truely;
 
-    expect($scope.dismiss).to.be.a('function');
+    expect($scope.isNew).to.be.true;
 
+    expect($scope.dismiss).to.be.a('function');
   });
 
   it('should close modal when clicked on a presentation',function(){
@@ -47,14 +55,15 @@ describe('controller: Add Presentation Modal', function() {
     var presentationName = 'presentationName';
     $rootScope.$broadcast('risevision.schedules.presentation-selected',
       presentationId, presentationName);
-    $scope.$digest();
-    $broadcastSpy.should.have.been.calledWith('risevision.schedules.new-item',TYPE_PRESENTATION, presentationId, presentationName);
+
+    expect(itemUpdated).to.be.true;
     $modalInstanceCloseSpy.should.have.been.called;
   });
 
   it('should dismiss modal when clicked on close with no action',function(){
     $scope.dismiss();
-    $scope.$digest();
+
+    expect(itemUpdated).to.be.false;
     $modalInstanceCloseSpy.should.have.been.called;
   });
 

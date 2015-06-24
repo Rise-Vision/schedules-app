@@ -1,36 +1,46 @@
 'use strict';
 
 angular.module('risevision.schedulesApp.directives')
-  .directive('scheduleFields', ['$modal', 'TYPE_URL', 'TYPE_PRESENTATION',
-    function ($modal, TYPE_URL, TYPE_PRESENTATION) {
+  .directive('playlistItem', ['$modal', 'TYPE_PRESENTATION',
+    function ($modal, TYPE_PRESENTATION) {
       return {
         restrict: 'E',
-        templateUrl: 'partials/schedule-fields.html',
+        scope: {
+          playlistItem: '='
+        },
+        templateUrl: 'partials/playlist-item.html',
         link: function ($scope) {
-          $scope.addUrlItem = function () {
+          $scope.remove = function () {
+            
+          };
+
+          $scope.changeItem = function () {
+            if ($scope.playlistItem.type === TYPE_PRESENTATION) {
+              editPresentationItem();
+            } else {
+              editUrlItem();
+            }
+          };
+
+          var editUrlItem = function () {
             $modal.open({
               templateUrl: 'partials/url-modal.html',
               controller: 'editUrlModal',
               resolve: {
                 playlistItem: function () {
-                  return {
-                    type: TYPE_URL,
-                    name: 'URL Item'
-                  };
+                  return $scope.playlistItem;
                 }
               }
             });
           };
 
-          $scope.addPresentationItem = function () {
+          var editPresentationItem = function () {
             $modal.open({
               templateUrl: 'partials/presentation-modal.html',
               controller: 'editPresentationModal',
               resolve: {
                 playlistItem: function () {
-                  return {
-                    type: TYPE_PRESENTATION
-                  };
+                  return $scope.playlistItem;
                 }
               }
             });
