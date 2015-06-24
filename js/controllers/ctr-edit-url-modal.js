@@ -2,9 +2,10 @@
 
 angular.module('risevision.schedulesApp.controllers')
   .controller('editUrlModal', ['$scope', '$rootScope', '$modalInstance',
-    'scheduleFactory', 'playlistItem',
-    function ($scope, $rootScope, $modalInstance, scheduleFactory,
+    'userState', 'scheduleFactory', 'playlistItem',
+    function ($scope, $rootScope, $modalInstance, userState, scheduleFactory,
       playlistItem) {
+      $scope.companyId = userState.getSelectedCompanyId();
       $scope.isNew = !playlistItem.objectReference;
       $scope.url = playlistItem.objectReference;
 
