@@ -1,0 +1,32 @@
+<div class="content-box-body" style="border-bottom:1px solid #e6e6e6" ng-class="{ 'animated fadeIn': edit}">
+
+  <div class="pull-right">
+   <span class="btn-group btn-group-sm">
+     <button class="btn btn-default"><i class="fa fa-arrow-up"></i></button>
+     <button class="btn btn-default"><i class="fa fa-arrow-down"></i></button>
+   </span>
+
+   <button class="btn btn-sm btn-default">
+     <i class="fa fa-copy"></i>
+   </button>
+
+   <button class="btn btn-sm btn-default" ng-click="edit = !edit">
+     <i class="fa fa-pencil"></i>
+   </button>
+  </div><!--pull-right-->
+
+  <h4 class="remove-top half-bottom">{{playlistItem.name}}</h4>
+  <p class="text-muted remove-bottom">{{playlistItem.objectReference}} <a class="add-left" ng-click="changeItem()" ng-show="edit">Change</a></p>
+
+  <div ng-show="edit" class="add-top">
+  <div class="form-group" >
+   <label class="control-label">Name</label>
+   <input type="text" class="form-control" placeholder="Item Name" ng-model="playlistItem.name"> 
+  </div>
+
+  <div>
+   <button ng-click="remove()" class="btn btn-danger btn-sm">Remove</button>
+  </div>
+  </div><!--edit-->
+
+</div><!--animated fadeIn-->

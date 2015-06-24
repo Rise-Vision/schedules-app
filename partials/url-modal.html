@@ -2,7 +2,7 @@
   <button type="button" class="close" ng-click="dismiss()" aria-hidden="true">
     <i class="fa fa-times"></i>
   </button>
-  <h3 class="modal-title">Add Playlist URL</h3>
+  <h3 class="modal-title">{{isNew ? 'Add' : ''}} Playlist URL</h3>
 </div><!--modal-header-->
 
 <div class="modal-body">          
@@ -15,6 +15,6 @@
 </div><!--modal-body-->
 
 <div class="modal-footer">
-  <button class="btn-primary btn" ng-click="add()">Add <i class="fa fa-check icon-right"></i></button>
+  <button class="btn-primary btn" ng-click="updateUrl()">{{isNew ? 'Add' : 'Update'}} <i class="fa fa-check icon-right"></i></button>
   <button class="btn btn-default" ng-click="dismiss()">Cancel <i class="fa fa-times icon-right"></i></button>
 </div><!--modal-footer-->

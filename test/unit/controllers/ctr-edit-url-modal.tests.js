@@ -12,28 +12,29 @@ describe('controller: Add Url Modal', function() {
         }
       }
     });
-    $provide.service('userState',function(){
+    $provide.service('scheduleFactory',function(){
       return {
-        getSelectedCompanyId : function(){
-          return "companyId";
+        updatePlaylistItem : function(){
+          itemUpdated = true;
         }
       }
     });
-    $provide.value('TYPE_URL', 'url');
+    $provide.value('playlistItem', {});
   }));
-  var $scope, $modalInstance, $modalInstanceCloseSpy, $broadcastSpy;
+  var $scope, $modalInstance, $modalInstanceCloseSpy, itemUpdated;
   beforeEach(function(){
+    itemUpdated = false;
+    
     inject(function($injector,$rootScope, $controller){
       $scope = $rootScope.$new();
       $modalInstance = $injector.get('$modalInstance');
       $modalInstanceCloseSpy = sinon.spy($modalInstance, 'close');
-      $broadcastSpy = sinon.spy($rootScope, '$broadcast');
-      $controller('addUrlModal', {
+      $controller('editUrlModal', {
         $scope : $scope,
         $rootScope: $rootScope,
         $modalInstance : $modalInstance,
-        confirmationTitle: $injector.get('userState'),
-        TYPE_URL: $injector.get('TYPE_URL')
+        scheduleFactory: $injector.get('scheduleFactory'),
+        playlistItem: $injector.get('playlistItem')
       });
       $scope.$digest();
     });
@@ -41,26 +42,24 @@ describe('controller: Add Url Modal', function() {
   
   it('should exist',function(){
     expect($scope).to.be.truely;
+    
+    expect($scope.isNew).to.be.true;
 
-    expect($scope.add).to.be.a('function');
+    expect($scope.updateUrl).to.be.a('function');
     expect($scope.dismiss).to.be.a('function');
   });
 
-  it('should set the scope companyId',function(){
-    expect($scope.companyId).to.be.truely;
-    expect($scope.companyId).to.equal("companyId");
-  });
-
   it('should close modal when clicked ok',function(){
-    $scope.add();
-    $scope.$digest();
-    $broadcastSpy.should.have.been.calledWith('risevision.schedules.new-item');
+    $scope.updateUrl();
+
+    expect(itemUpdated).to.be.true;
     $modalInstanceCloseSpy.should.have.been.called;
   });
 
   it('should dismiss modal when clicked on close with no action',function(){
     $scope.dismiss();
-    $scope.$digest();
+    
+    expect(itemUpdated).to.be.false;
     $modalInstanceCloseSpy.should.have.been.called;
   });
   
