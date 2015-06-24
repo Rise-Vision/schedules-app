@@ -1,0 +1,32 @@
+<div ng-controller="presentationListController">
+  <div class="add-bottom">
+    <search-filter filter-config="filterConfig" search="search" do-search="doSearch"></search-filter>
+  </div>
+  <div class="content-box list-group scrollable-list auto-height" scrolling-list="load()"
+       rv-spinner rv-spinner-key="presentation-list-loader"
+       rv-spinner-start-active="1">
+    <table id="presentationListTable" class="table-2 table-hover table-selector single-selector">
+      <thead>
+      <tr>
+        <th id="tableHeaderName" ng-click="sortBy('name')">
+          Name
+          <!-- ngIf: search.sortBy == 'name' -->
+          <i ng-if="search.sortBy == 'name'" class="fa ng-scope fa-long-arrow-up" ng-class="{false: 'fa-long-arrow-up', true: 'fa-long-arrow-down'}[search.reverse]"></i>
+          <!-- end ngIf: search.sortBy == 'name' -->
+        </th>
+        <th id="tableHeaderStatus" class="text-right">
+          Status
+        </th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr data-ng-click="toggleObject.item = $index; select(presentation.id, presentation.name);" data-ng-class="{'active' : toggleObject.item == $index}" ng-repeat="presentation in presentations.list">
+        <td>{{presentation.name}}</td>
+        <td class="text-right">{{presentation.revisionStatus | presentationStatus}}</td>
+      </tr>
+      </tbody>
+
+    </table>
+  </div>
+</div>

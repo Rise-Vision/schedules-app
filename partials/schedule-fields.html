@@ -11,10 +11,10 @@
     <h3 class="remove-top" style="line-height:33px;">Playlist</h3>
   </div>
   <div class="btn-group" dropdown>
-    <button dropdown-toggle class="dropdown-toggle btn btn-primary">Add Playlist Item <i class="fa fa-plus icon-right"></i></button>
+    <button id="addPlaylistItemButton" dropdown-toggle class="dropdown-toggle btn btn-primary">Add Playlist Item <i class="fa fa-plus icon-right"></i></button>
     <ul class="dropdown-menu playlist-menu" role="menu">
       <li>
-        <a ng-click="addPresentationItem()">
+        <a id="addPresentationItemButton" ng-click="addPresentationItem()">
           <span>Presentation</span>
         </a>
       </li>
@@ -27,3 +27,4 @@
   </div>
   <button class="btn btn-default">Preview <i class="fa fa-play icon-right"></i></button>
 </div>
+
