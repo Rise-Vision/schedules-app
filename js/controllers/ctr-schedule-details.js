@@ -1,64 +1,20 @@
 'use strict';
 
 angular.module('risevision.schedulesApp.controllers')
-  .controller('scheduleDetails', ['$scope', '$q', '$state', '$stateParams',
-    'schedule', '$loading', '$modal', '$log', '$templateCache',
-    'scheduleTracker',
-    function ($scope, $q, $state, $stateParams, schedule,
-      $loading, $modal, $log, $templateCache, scheduleTracker) {
-      $scope.scheduleId = $stateParams.scheduleId;
-      $scope.savingSchedule = false;
+  .controller('scheduleDetails', ['$scope', '$q', '$state',
+    'scheduleFactory', '$loading', '$log', '$modal', '$templateCache',
+    function ($scope, $q, $state, scheduleFactory, $loading, $log, $modal,
+      $templateCache) {
+      $scope.factory = scheduleFactory;
+      $scope.schedule = scheduleFactory.schedule;
 
-      $scope.$watch('loadingSchedule', function (loading) {
+      $scope.$watch('factory.loadingSchedule', function (loading) {
         if (loading) {
           $loading.start('schedule-loader');
         } else {
           $loading.stop('schedule-loader');
         }
       });
-
-      $scope.$watch('scheduleId', function (scheduleId) {
-        if (scheduleId) {
-          _getSchedule();
-        }
-      });
-
-      var _getSchedule = function () {
-        //load the schedule based on the url param
-        $scope.loadingSchedule = true;
-
-        schedule.get($scope.scheduleId)
-          .then(function (result) {
-            $scope.schedule = result.item;
-          })
-          .then(null, function (e) {
-            $scope.submitError = e.message ? e.message : e.toString();
-          })
-          .finally(function () {
-            $scope.loadingSchedule = false;
-          });
-      };
-
-      var _delete = function () {
-        //show loading spinner
-        $scope.loadingSchedule = true;
-
-        schedule.delete($scope.scheduleId)
-          .then(function (result) {
-            scheduleTracker('Schedule Deleted', $scope.scheduleId,
-              $scope.schedule.name);
-
-            $scope.schedule = result.item;
-
-            $state.go('schedule.list');
-          })
-          .then(null, function (e) {
-            $scope.submitError = e.message ? e.message : e.toString();
-          })
-          .finally(function () {
-            $scope.loadingSchedule = false;
-          });
-      };
 
       $scope.confirmDelete = function () {
         $scope.modalInstance = $modal.open({
@@ -80,12 +36,7 @@ angular.module('risevision.schedulesApp.controllers')
           }
         });
 
-        $scope.modalInstance.result.then(function () {
-          // do what you need if user presses ok
-          _delete();
-        }, function () {
-          // do what you need to do if user cancels
-        });
+        $scope.modalInstance.result.then(scheduleFactory.deleteSchedule);
       };
 
       $scope.addSchedule = function () {
@@ -129,32 +80,13 @@ angular.module('risevision.schedulesApp.controllers')
       };
 
       $scope.save = function () {
-        var deferred = $q.defer();
-
         if (!$scope.scheduleDetails.$valid) {
-          $log.error('form not valid: ', $scope.scheduleDetails.errors);
-          deferred.reject();
+          $log.info('form not valid: ', $scope.scheduleDetails.$error);
+
+          return $q.reject();
         } else {
-          $scope.savingSchedule = true;
-
-          schedule.update($scope.scheduleId, $scope.schedule)
-            .then(function (scheduleId) {
-              scheduleTracker('Schedule Updated', $scope.scheduleId,
-                $scope.schedule.name);
-
-              deferred.resolve();
-            })
-            .then(null, function (e) {
-              $scope.submitError = e.message ? e.message : e.toString();
-
-              deferred.reject();
-            })
-            .finally(function () {
-              $scope.savingSchedule = false;
-            });
+          return scheduleFactory.updateSchedule();
         }
-
-        return deferred.promise;
       };
 
     }

@@ -127,32 +127,6 @@ describe('service: schedule:', function() {
                 def.reject("API Failed");
               }
               return def.promise;
-            },
-            restart: function(obj) {
-              expect(obj).to.be.ok;
-
-              var def = Q.defer();
-              if (obj.id) {
-                def.resolve({
-                  item: {}
-                });
-              } else {
-                def.reject("API Failed");
-              }
-              return def.promise;
-            },
-            reboot: function(obj) {
-              expect(obj).to.be.ok;
-
-              var def = Q.defer();
-              if (obj.id) {
-                def.resolve({
-                  item: {}
-                });
-              } else {
-                def.reject("API Failed");
-              }
-              return def.promise;
             }
           }
         });
