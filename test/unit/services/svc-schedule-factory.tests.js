@@ -93,9 +93,7 @@ describe('service: scheduleFactory:', function() {
     expect(scheduleFactory.getSchedule).to.be.a('function');
     expect(scheduleFactory.addSchedule).to.be.a('function');
     expect(scheduleFactory.updateSchedule).to.be.a('function');
-    expect(scheduleFactory.deleteSchedule).to.be.a('function');
-    
-    expect(scheduleFactory.updatePlaylistItem).to.be.a('function');
+    expect(scheduleFactory.deleteSchedule).to.be.a('function');    
   });
   
   it('newSchedule: should reset the schedule',function(){
@@ -255,30 +253,5 @@ describe('service: scheduleFactory:', function() {
       },10);
     });
   });
-
-  describe('updatePlaylistItem: ',function(){
-    var playlistItem = {
-      type: 'url',
-      objectReference: 'http://www.risevision.com'
-    }
-    it('should add the item',function(){
-      scheduleFactory.schedule.content = [];
-      
-      scheduleFactory.updatePlaylistItem(playlistItem);
-
-      expect(scheduleFactory.schedule.content.length).to.equal(1);
-      expect(scheduleFactory.schedule.content[0]).to.equal(playlistItem);    
-    });
-    
-    it('should not add duplicate item',function(){
-      scheduleFactory.schedule.content = [playlistItem];
-      
-      scheduleFactory.updatePlaylistItem(playlistItem);
-
-      expect(scheduleFactory.schedule.content.length).to.equal(1);
-      expect(scheduleFactory.schedule.content[0]).to.equal(playlistItem);    
-    });
-  });
-
 
 });

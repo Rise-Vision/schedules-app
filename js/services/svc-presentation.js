@@ -12,7 +12,7 @@ angular.module('risevision.schedulesApp.services')
   .service('presentation', ['$q', '$log', 'coreAPILoader', 'userState',
     'pick', 'PRESENTAION_WRITABLE_FIELDS', 'PRESENTAION_SEARCH_FIELDS',
     function ($q, $log, coreAPILoader, userState, pick,
-              PRESENTAION_WRITABLE_FIELDS, PRESENTAION_SEARCH_FIELDS) {
+      PRESENTAION_WRITABLE_FIELDS, PRESENTAION_SEARCH_FIELDS) {
 
       var createSearchQuery = function (fields, search) {
         var query = '';

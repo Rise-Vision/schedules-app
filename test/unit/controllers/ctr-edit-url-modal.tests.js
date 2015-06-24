@@ -12,7 +12,7 @@ describe('controller: Add Url Modal', function() {
         }
       }
     });
-    $provide.service('scheduleFactory',function(){
+    $provide.service('playlistFactory',function(){
       return {
         updatePlaylistItem : function(){
           itemUpdated = true;
@@ -41,7 +41,7 @@ describe('controller: Add Url Modal', function() {
         $rootScope: $rootScope,
         $modalInstance : $modalInstance,
         userState: $injector.get('userState'),
-        scheduleFactory: $injector.get('scheduleFactory'),
+        playlistFactory: $injector.get('playlistFactory'),
         playlistItem: $injector.get('playlistItem')
       });
       $scope.$digest();

@@ -1,4 +1,9 @@
 <div class="content-box add-top scrollable-list">
   <playlist-item ng-repeat="playlistItem in playlistItems" playlist-item="playlistItem">
   </playlist-item>
+  <div class="content-box-body" ng-hide="playlistItems.length">
+    <p class="text-muted text-center remove-bottom">
+      You haven't added any items to your Playlist yet.
+    </p>
+  </div>
 </div><!--content-box-->
