@@ -2,8 +2,8 @@
 
 angular.module('risevision.schedulesApp.controllers')
   .controller('editUrlModal', ['$scope', '$rootScope', '$modalInstance',
-    'userState', 'scheduleFactory', 'playlistItem',
-    function ($scope, $rootScope, $modalInstance, userState, scheduleFactory,
+    'userState', 'playlistFactory', 'playlistItem',
+    function ($scope, $rootScope, $modalInstance, userState, playlistFactory,
       playlistItem) {
       $scope.companyId = userState.getSelectedCompanyId();
       $scope.isNew = !playlistItem.objectReference;
@@ -12,7 +12,7 @@ angular.module('risevision.schedulesApp.controllers')
       $scope.updateUrl = function () {
         playlistItem.objectReference = $scope.url;
 
-        scheduleFactory.updatePlaylistItem(playlistItem);
+        playlistFactory.updatePlaylistItem(playlistItem);
 
         $scope.dismiss();
       };

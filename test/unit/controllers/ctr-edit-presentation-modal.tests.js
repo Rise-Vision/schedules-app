@@ -1,7 +1,6 @@
 'use strict';
-describe('controller: Add Presentation Modal', function() {
+describe('controller: Edit Presentation Modal', function() {
   beforeEach(module('risevision.schedulesApp.controllers'));
-  beforeEach(module('risevision.schedulesApp.services'));
   beforeEach(module(function ($provide) {
     $provide.service('$modalInstance',function(){
       return {
@@ -13,7 +12,7 @@ describe('controller: Add Presentation Modal', function() {
         }
       }
     });
-    $provide.service('scheduleFactory',function(){
+    $provide.service('playlistFactory',function(){
       return {
         updatePlaylistItem : function(){
           itemUpdated = true;
@@ -35,7 +34,7 @@ describe('controller: Add Presentation Modal', function() {
         $scope : $scope,
         $rootScope: $rootScope,
         $modalInstance : $modalInstance,
-        scheduleFactory: $injector.get('scheduleFactory'),
+        playlistFactory: $injector.get('playlistFactory'),
         playlistItem: $injector.get('playlistItem')
       });
       $scope.$digest();

@@ -118,12 +118,6 @@ angular.module('risevision.schedulesApp.services')
             factory.loadingSchedule = false;
           });
       };
-      
-      factory.updatePlaylistItem = function(playlistItem) {
-        if (factory.schedule.content.indexOf(playlistItem) == -1) {
-          factory.schedule.content.push(playlistItem);
-        }
-      }
 
       return factory;
     }
