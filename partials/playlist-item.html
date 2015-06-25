@@ -2,15 +2,15 @@
 
   <div class="pull-right">
    <span class="btn-group btn-group-sm">
-     <button class="btn btn-default" ng-click="factory.movePlaylistItemUp(playlistItem)" ng-disabled="!factory.canPlaylistItemMoveUp(playlistItem)"><i class="fa fa-arrow-up"></i></button>
-     <button class="btn btn-default" ng-click="factory.movePlaylistItemDown(playlistItem)" ng-disabled="!factory.canPlaylistItemMoveDown(playlistItem)"><i class="fa fa-arrow-down"></i></button>
+     <button class="btn btn-default" id="moveUpButton" ng-click="factory.movePlaylistItemUp(playlistItem)" ng-disabled="!factory.canPlaylistItemMoveUp(playlistItem)"><i class="fa fa-arrow-up"></i></button>
+     <button class="btn btn-default" id="moveDownButton" ng-click="factory.movePlaylistItemDown(playlistItem)" ng-disabled="!factory.canPlaylistItemMoveDown(playlistItem)"><i class="fa fa-arrow-down"></i></button>
    </span>
 
    <button class="btn btn-sm btn-default">
      <i class="fa fa-copy"></i>
    </button>
 
-   <button class="btn btn-sm btn-default" ng-click="edit = !edit">
+   <button class="btn btn-sm btn-default" id="expandButton" ng-click="edit = !edit">
      <i class="fa fa-pencil"></i>
    </button>
   </div><!--pull-right-->
@@ -21,11 +21,11 @@
   <div ng-show="edit" class="add-top">
   <div class="form-group" >
    <label class="control-label">Name</label>
-   <input type="text" class="form-control" placeholder="Item Name" ng-model="playlistItem.name"> 
+   <input type="text" class="form-control" id="itemName" placeholder="Item Name" ng-model="playlistItem.name"> 
   </div>
 
   <div>
-   <button ng-click="remove()" class="btn btn-danger btn-sm">Remove</button>
+   <button class="btn btn-danger btn-sm" id="removeButton" ng-click="remove()">Remove</button>
   </div>
   </div><!--edit-->
 

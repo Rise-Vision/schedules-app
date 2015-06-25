@@ -1,13 +1,13 @@
 'use strict';
 var ScheduleAddPage = function() {
-  var displaysAppContainer = element(by.css('.schedules-app'));
+  var schedulesAppContainer = element(by.css('.schedules-app'));
   var title = element(by.id('title'));
   var displayNameField = element(by.model('schedule.name'));
 
   var addPlaylistItemButton = element(by.id('addPlaylistItemButton'));
+  var addUrlItemButton = element(by.id('addUrlItemButton'));
   var addPresentationItemButton = element(by.id('addPresentationItemButton'));
-  var presentationItems = element(by.repeater('presentation in presentations'));
-
+  var playlistItems = element.all(by.repeater('playlistItem in playlistItems'));
 
   var saveButton = element(by.id('saveButton'));
   var cancelButton = element(by.id('cancelButton'));
@@ -16,7 +16,7 @@ var ScheduleAddPage = function() {
 
 
   this.getSchedulesAppContainer = function() {
-    return displaysAppContainer;
+    return schedulesAppContainer;
   };
 
   this.getTitle = function() {
@@ -51,24 +51,12 @@ var ScheduleAddPage = function() {
     return addPresentationItemButton;
   };
 
-  this.getAddPresentationModal = function() {
-    return addPresentationModal;
+  this.getAddUrlItemButton = function() {
+    return addUrlItemButton;
   };
 
-  this.getModalTitle = function() {
-    return modalTitle;
-  };
-
-  this.getPresentationSearchInput = function() {
-    return presentationSearchInput;
-  };
-
-  this.getPresentationListTable = function() {
-    return presentationListTable;
-  };
-
-  this.getPresentationItems = function() {
-    return presentationItems;
+  this.getPlaylistItems = function() {
+    return playlistItems;
   };
 
 };
