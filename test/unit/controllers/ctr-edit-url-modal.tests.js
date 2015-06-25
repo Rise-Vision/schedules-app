@@ -19,6 +19,13 @@ describe('controller: Add Url Modal', function() {
         }
       }
     });
+    $provide.service('userState', function() {
+      return {
+        getSelectedCompanyId: function() {
+          return 'companyId';
+        }
+      };
+    })
     $provide.value('playlistItem', {});
   }));
   var $scope, $modalInstance, $modalInstanceCloseSpy, itemUpdated;
@@ -33,6 +40,7 @@ describe('controller: Add Url Modal', function() {
         $scope : $scope,
         $rootScope: $rootScope,
         $modalInstance : $modalInstance,
+        userState: $injector.get('userState'),
         scheduleFactory: $injector.get('scheduleFactory'),
         playlistItem: $injector.get('playlistItem')
       });
@@ -43,6 +51,7 @@ describe('controller: Add Url Modal', function() {
   it('should exist',function(){
     expect($scope).to.be.truely;
     
+    expect($scope.companyId).to.equal('companyId');
     expect($scope.isNew).to.be.true;
 
     expect($scope.updateUrl).to.be.a('function');
