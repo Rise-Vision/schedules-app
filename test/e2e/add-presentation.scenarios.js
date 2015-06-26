@@ -87,7 +87,7 @@ describe("In order to have presentation on a schedule " +
             presentationItem.click();
           });
           xit('should add the presentation item to the Playlist', function () {
-            expect(scheduleAddPage.getPresentationItems().get(0).getText()).to.eventually.equal(presentationItemName);
+            expect(scheduleAddPage.getPlaylistItems().get(0).getText()).to.eventually.equal(presentationItemName);
           });
         });
 
