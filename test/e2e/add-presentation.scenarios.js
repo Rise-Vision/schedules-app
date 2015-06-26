@@ -6,6 +6,8 @@ var SchedulesListPage = require('./pages/schedulesListPage.js');
 var ScheduleAddPage = require('./pages/scheduleAddPage.js');
 var helper = require('rv-common-e2e').helper;
 var PresentationModalPage = require('./pages/presentationModalPage.js');
+var PlaylistItemModalPage = require('./pages/playlistItemModalPage.js');
+var PlaylistPage = require('./pages/playlistPage.js');
 
 browser.driver.manage().window().setSize(1024, 768);
 describe("In order to have presentation on a schedule " +
@@ -17,6 +19,8 @@ describe("In order to have presentation on a schedule " +
   var schedulesListPage;
   var scheduleAddPage;
   var presentationModalPage;
+  var playlistItemModalPage;
+  var playlistPage;
 
   before(function (){
     homepage = new HomePage();
@@ -24,6 +28,8 @@ describe("In order to have presentation on a schedule " +
     scheduleAddPage = new ScheduleAddPage();
     commonHeaderPage = new CommonHeaderPage();
     presentationModalPage = new PresentationModalPage();
+    playlistItemModalPage = new PlaylistItemModalPage();
+    playlistPage = new PlaylistPage();
 
     homepage.get();
     //wait for spinner to go away.
@@ -62,7 +68,7 @@ describe("In order to have presentation on a schedule " +
 
         it('should show modal title', function () {
 
-          expect(presentationModalPage.getModalTitle().getText()).to.eventually.equal('Add Playlist Presentation');
+          expect(presentationModalPage.getModalTitle().getText()).to.eventually.equal('Select Presentation');
         });
 
         it('should show a search box', function () {
@@ -74,20 +80,34 @@ describe("In order to have presentation on a schedule " +
         });
 
         it('should show presentations', function () {
-          helper.wait(presentationModalPage.getPresentationItems()).then(function () {
-            expect(presentationModalPage.getPresentationItems().isPresent()).to.eventually.be.true;
-          });
+          //wait for spinner to go away.
+          browser.wait(function() {
+            return presentationModalPage.getPresentationListLoader().isDisplayed().then(function(result){return !result});
+          }, 20000);
+          
+          expect(presentationModalPage.getPresentationItems().get(0).isPresent()).to.eventually.be.true;
+          expect(presentationModalPage.getPresentationItems().count()).to.eventually.be.above(0);
+          
         });
 
-        xdescribe('Given the user chooses a presentation',function () {
+        describe('Given the user chooses a presentation',function () {
           var presentationItemName;
           before(function () {
-            var presentationItem = presentationModalPage.getPresentationItems().get(0);
-            presentationItemName = presentationItem.getText();
-            presentationItem.click();
+            presentationModalPage.getPresentationNames().get(0).getText().then(function (text) {
+              presentationItemName = text;
+            });
+            presentationModalPage.getPresentationItems().get(0).click();
           });
-          xit('should add the presentation item to the Playlist', function () {
-            expect(scheduleAddPage.getPlaylistItems().get(0).getText()).to.eventually.equal(presentationItemName);
+          it('should show the playlist item dialog', function () {
+            expect(playlistItemModalPage.getPlaylistItemModal().isDisplayed()).to.eventually.be.true;
+            expect(playlistItemModalPage.getModalTitle().getText()).to.eventually.equal('Add Playlist Item');
+            expect(playlistItemModalPage.getNameTextbox().getAttribute('value')).to.eventually.equal(presentationItemName);
+          });
+          
+          it('should add the playlist item', function () {
+            playlistItemModalPage.getSaveButton().click();
+
+            expect(scheduleAddPage.getPlaylistItems().get(0).isDisplayed()).to.eventually.be.true;
           });
         });
 

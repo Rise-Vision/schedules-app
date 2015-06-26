@@ -40,13 +40,36 @@ describe('service: playlistFactory:', function() {
 
   it('should exist',function(){
     expect(playlistFactory).to.be.truely;
-        
+    
+    expect(playlistFactory.isNew).to.be.a('function');    
+    expect(playlistFactory.getNewUrlItem).to.be.a('function');    
+    expect(playlistFactory.getNewPresentationItem).to.be.a('function');    
     expect(playlistFactory.removePlaylistItem).to.be.a('function');
     expect(playlistFactory.updatePlaylistItem).to.be.a('function');
     expect(playlistFactory.canPlaylistItemMoveDown).to.be.a('function');
     expect(playlistFactory.canPlaylistItemMoveUp).to.be.a('function');
     expect(playlistFactory.movePlaylistItemDown).to.be.a('function');
     expect(playlistFactory.movePlaylistItemUp).to.be.a('function');
+  });
+  
+  it('isNew: ', function() {
+    expect(playlistFactory.isNew(playlistItem)).to.be.false;
+    expect(playlistFactory.isNew(playlistFactory.getNewUrlItem())).to.be.true;
+  });
+  
+  it('getNewUrlItem: ', function() {
+    var playlistItem = playlistFactory.getNewUrlItem();
+    
+    expect(playlistItem.duration).to.equal(10);
+    expect(playlistItem.type).to.equal('url');
+    expect(playlistItem.name).to.equal('URL Item');
+  });
+  
+  it('getNewPresentationItem: ', function() {
+    var playlistItem = playlistFactory.getNewPresentationItem();
+    
+    expect(playlistItem.duration).to.equal(10);
+    expect(playlistItem.type).to.equal('presentation');
   });
 
   describe('removePlaylistItem: ',function(){
@@ -63,7 +86,6 @@ describe('service: playlistFactory:', function() {
       expect(playlist[1]).to.equal(playlistItem);    
     });
   });
-
 
   describe('updatePlaylistItem: ',function(){
     it('should add the item',function(){
