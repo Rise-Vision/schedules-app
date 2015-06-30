@@ -16,18 +16,21 @@ describe('service: playlistFactory:', function() {
     
     playlist = [playlistItem0, playlistItem, playlistItem2];
 
+    scheduleFactory = {
+      schedule: {
+        content: playlist
+      }
+    };
+    
     $provide.service('$q', function() {return Q;});
 
     $provide.service('scheduleFactory',function () {
-      return {
-        schedule: {
-          content: playlist
-        }
-      };
+      return scheduleFactory;
     });
 
   }));
   var playlist, playlistItem, playlistItem0, playlistItem2, playlistFactory, trackerCalled, updateSchedule, currentState;
+  var scheduleFactory;
   beforeEach(function(){
     trackerCalled = undefined;
     currentState = undefined;
@@ -41,6 +44,7 @@ describe('service: playlistFactory:', function() {
   it('should exist',function(){
     expect(playlistFactory).to.be.truely;
     
+    expect(playlistFactory.getPlaylist).to.be.a('function');
     expect(playlistFactory.isNew).to.be.a('function');    
     expect(playlistFactory.getNewUrlItem).to.be.a('function');    
     expect(playlistFactory.getNewPresentationItem).to.be.a('function');    
@@ -50,6 +54,21 @@ describe('service: playlistFactory:', function() {
     expect(playlistFactory.canPlaylistItemMoveUp).to.be.a('function');
     expect(playlistFactory.movePlaylistItemDown).to.be.a('function');
     expect(playlistFactory.movePlaylistItemUp).to.be.a('function');
+  });
+  
+  describe('getPlaylist: ', function() {
+    it('should get the playlist', function() {
+      expect(playlistFactory.getPlaylist()).to.equal(playlist);
+    });
+    
+    it('should initialize playlist if undefined', function() {
+      scheduleFactory.schedule.content = undefined;
+      
+      var _playlist = playlistFactory.getPlaylist();
+      
+      expect(_playlist).to.be.a('array');
+      expect(_playlist.length).to.equal(0);
+    });
   });
   
   it('isNew: ', function() {

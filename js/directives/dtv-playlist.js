@@ -11,7 +11,7 @@ angular.module('risevision.schedulesApp.directives')
         templateUrl: 'partials/playlist.html',
         link: function ($scope) {
           $scope.factory = playlistFactory;
-          
+
           $scope.manage = function (playlistItem) {
             $modal.open({
               templateUrl: 'partials/playlist-item.html',
