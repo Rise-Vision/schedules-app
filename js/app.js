@@ -11,6 +11,7 @@ angular.module('risevision.schedulesApp', [
   'risevision.common.components.confirm-instance',
   'risevision.widget.common.storage-selector',
   'ngTouch',
+  'ngAnimate',
   'ui.bootstrap',
   'ui.bootstrap.showErrors',
   'risevision.schedulesApp.config',
