@@ -1,32 +1,60 @@
-<div class="content-box-body" style="border-bottom:1px solid #e6e6e6" ng-class="{ 'animated fadeIn': edit}">
-
-  <div class="pull-right">
-   <span class="btn-group btn-group-sm">
-     <button class="btn btn-default" id="moveUpButton" ng-click="factory.movePlaylistItemUp(playlistItem)" ng-disabled="!factory.canPlaylistItemMoveUp(playlistItem)"><i class="fa fa-arrow-up"></i></button>
-     <button class="btn btn-default" id="moveDownButton" ng-click="factory.movePlaylistItemDown(playlistItem)" ng-disabled="!factory.canPlaylistItemMoveDown(playlistItem)"><i class="fa fa-arrow-down"></i></button>
-   </span>
-
-   <button class="btn btn-sm btn-default">
-     <i class="fa fa-copy"></i>
-   </button>
-
-   <button class="btn btn-sm btn-default" id="expandButton" ng-click="edit = !edit">
-     <i class="fa fa-pencil"></i>
-   </button>
-  </div><!--pull-right-->
-
-  <h4 class="remove-top half-bottom">{{playlistItem.name}}</h4>
-  <p class="text-muted remove-bottom">{{playlistItem.objectReference}} <a class="add-left" ng-click="changeItem()" ng-show="edit">Change</a></p>
-
-  <div ng-show="edit" class="add-top">
-  <div class="form-group" >
-   <label class="control-label">Name</label>
-   <input type="text" class="form-control" id="itemName" placeholder="Item Name" ng-model="playlistItem.name"> 
+<div id="playlistItemModal">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="dismiss()" aria-hidden="true">
+      <i class="fa fa-times"></i>
+    </button>
+    <h3 class="modal-title">{{isNew ? 'Add' : 'Edit'}}  Playlist Item</h3>
   </div>
 
-  <div>
-   <button class="btn btn-danger btn-sm" id="removeButton" ng-click="remove()">Remove</button>
-  </div>
-  </div><!--edit-->
+  <div class="modal-body">
+    <div class="form-group">
+      <label class="control-label">Name</label>
+      <input type="text" class="form-control" id="itemName" placeholder="Item Name" ng-model="playlistItem.name"> 
+    </div>
+    
+    <div class="form-group" ng-if="playlistItem.type === 'url'">
+      <label class="control-label">URL</label>
+      <div class="input-group custom-addon">
+        <input type="text" class="form-control" placeholder="URL" id="url" ng-model="playlistItem.objectReference">
+        <span class="input-group-addon">
+          <storage-selector company-id="{{companyId}}" type="single-file"></storage-selector>
+        </span>
+      </div>
+    </div>  
 
-</div><!--animated fadeIn-->
+    <div class="form-group" ng-if="playlistItem.type === 'presentation'">
+      <label class="control-label add-right">Presentation:</label>
+      <a class="clickable" ng-click="selectPresentation()">{{playlistItem.objectReference}}</a>
+    </div>
+
+    <hr>
+    <div class="form-group half-top">
+      <div class="row">
+        <div class="col-sm-4">
+          <label class="control-label">Duration</label>
+          <input type="text" class="form-control" id="itemDuration" ng-model="playlistItem.duration">
+        </div>
+      </div><!--row-->
+    </div>
+    
+    <div class="form-group">
+      <label class="control-label">Timeline</label>
+      <div class="content-box-editable remove-bottom clickable">
+        <div class="label label-tag">Always</div>
+      </div>  
+    </div><!--form-group-->
+
+    <div class="form-group">
+      <label class="control-label">Distribution</label>
+      <div class="content-box-editable remove-bottom clickable">
+        <div class="label label-tag">4 displays</div>
+      </div>  
+    </div><!--form-group-->
+
+  </div><!--modal-body-->
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary btn-fixed-width" id="itemSave" ng-click="save()">{{isNew ? 'Add' : 'Apply'}} <i class="fa fa-white fa-check icon-right"></i></button>
+    <button type="button" class="btn btn-default btn-fixed-width" ng-click="dismiss()">Cancel <i class="fa fa-times icon-right"></i></button>
+  </div>
+</div>

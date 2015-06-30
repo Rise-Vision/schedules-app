@@ -5,7 +5,7 @@ var CommonHeaderPage = require('rv-common-e2e').commonHeaderPage;
 var SchedulesListPage = require('./pages/schedulesListPage.js');
 var ScheduleAddPage = require('./pages/scheduleAddPage.js');
 var helper = require('rv-common-e2e').helper;
-var UrlModalPage = require('./pages/urlModalPage.js');
+var PlaylistItemModalPage = require('./pages/playlistItemModalPage.js');
 
 browser.driver.manage().window().setSize(1024, 768);
 describe("Add URL to a schedule " +
@@ -16,14 +16,14 @@ describe("Add URL to a schedule " +
   var commonHeaderPage;
   var schedulesListPage;
   var scheduleAddPage;
-  var urlModalPage;
+  var playlistItemModalPage;
 
   before(function (){
     homepage = new HomePage();
     schedulesListPage = new SchedulesListPage();
     scheduleAddPage = new ScheduleAddPage();
     commonHeaderPage = new CommonHeaderPage();
-    urlModalPage = new UrlModalPage();
+    playlistItemModalPage = new PlaylistItemModalPage();
 
     homepage.get();
     //wait for spinner to go away.
@@ -53,29 +53,29 @@ describe("Add URL to a schedule " +
       describe('Given a user clicks on the url button', function () {
         before(function () {
           scheduleAddPage.getAddUrlItemButton().click();
-          helper.wait(urlModalPage.getAddUrlModal(), 'Add URL Modal');
+          helper.wait(playlistItemModalPage.getPlaylistItemModal(), 'Add URL Item');
         });
 
         it('should open the Add URL Modal', function () {
-          expect(urlModalPage.getAddUrlModal().isDisplayed()).to.eventually.be.true;
+          expect(playlistItemModalPage.getPlaylistItemModal().isDisplayed()).to.eventually.be.true;
         });
 
         it('should show modal title', function () {
-          expect(urlModalPage.getModalTitle().getText()).to.eventually.equal('Add Playlist URL');
+          expect(playlistItemModalPage.getModalTitle().getText()).to.eventually.equal('Add Playlist Item');
         });
 
         it('should show a URL text box', function () {
-          expect(urlModalPage.getUrlInput().isDisplayed()).to.eventually.be.true;
+          expect(playlistItemModalPage.getUrlInput().isDisplayed()).to.eventually.be.true;
         });
 
         it('should show the Storage selector', function () {
-          expect(urlModalPage.getStorageSelectorIcon().isDisplayed()).to.eventually.be.true;
+          expect(playlistItemModalPage.getStorageSelectorIcon().isDisplayed()).to.eventually.be.true;
         });
 
         describe('Given the user enters a URL',function () {
           before(function () {
-            urlModalPage.getUrlInput().sendKeys('http://risevision.com/content.html');
-            urlModalPage.getUpdateButton().click();
+            playlistItemModalPage.getUrlInput().sendKeys('http://risevision.com/content.html');
+            playlistItemModalPage.getSaveButton().click();
           });
           it('should add the url item to the Playlist', function () {
             expect(scheduleAddPage.getPlaylistItems().get(0).isDisplayed()).to.eventually.be.true;

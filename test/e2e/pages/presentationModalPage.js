@@ -4,9 +4,9 @@ var PresentationModalPage = function() {
   var modalTitle = element(by.css('.modal-title'));
   var presentationSearchInput = element(by.id('presentationSearchInput'));
   var presentationListTable = element(by.id('presentationListTable'));
-  var presentationItems = element(by.repeater('presentation in presentations'));
-  var presentationListLoader = element(by.xpath('//div[@spinner-key="presentation-list-loader"]'));
-
+  var presentationItems = element.all(by.repeater('presentation in presentations.list'));
+  var presentationListLoader = element(by.css('#addPresentationModal .spinner-backdrop'));
+  var presentationNames = element.all(by.css('#addPresentationModal #presentationName'));
 
   this.getAddPresentationModal = function() {
     return addPresentationModal;
@@ -30,6 +30,10 @@ var PresentationModalPage = function() {
 
   this.getPresentationListLoader = function() {
     return presentationListLoader;
+  };
+  
+  this.getPresentationNames = function() {
+    return presentationNames;
   };
 
 };

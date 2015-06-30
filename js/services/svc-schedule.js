@@ -9,8 +9,6 @@ angular.module('risevision.schedulesApp.services')
   .constant('SCHEDULE_SEARCH_FIELDS', [
     'name', 'id'
   ])
-  .constant('TYPE_URL', 'url')
-  .constant('TYPE_PRESENTATION', 'presentation')
   .service('schedule', ['$q', '$log', 'coreAPILoader', 'userState',
     'pick', 'SCHEDULE_WRITABLE_FIELDS', 'SCHEDULE_SEARCH_FIELDS',
     function ($q, $log, coreAPILoader, userState, pick,

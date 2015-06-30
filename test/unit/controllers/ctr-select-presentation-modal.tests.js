@@ -12,30 +12,17 @@ describe('controller: Edit Presentation Modal', function() {
         }
       }
     });
-    $provide.service('playlistFactory',function(){
-      return {
-        updatePlaylistItem : function(){
-          itemUpdated = true;
-        }
-      }
-    });
-    $provide.value('playlistItem', {});
   }));
-  var $scope, $rootScope, $modalInstance, $modalInstanceCloseSpy, itemUpdated;
+  var $scope, $modalInstance, $modalInstanceDismissSpy, $modalInstanceCloseSpy;
   beforeEach(function(){
-    itemUpdated = false;
-    
-    inject(function($injector,_$rootScope_, $controller){
-      $rootScope = _$rootScope_;
+    inject(function($injector, $rootScope, $controller){
       $scope = $rootScope.$new();
       $modalInstance = $injector.get('$modalInstance');
+      $modalInstanceDismissSpy = sinon.spy($modalInstance, 'dismiss');
       $modalInstanceCloseSpy = sinon.spy($modalInstance, 'close');
-      $controller('editPresentationModal', {
+      $controller('selectPresentationModal', {
         $scope : $scope,
-        $rootScope: $rootScope,
-        $modalInstance : $modalInstance,
-        playlistFactory: $injector.get('playlistFactory'),
-        playlistItem: $injector.get('playlistItem')
+        $modalInstance : $modalInstance
       });
       $scope.$digest();
     });
@@ -44,26 +31,22 @@ describe('controller: Edit Presentation Modal', function() {
   it('should exist',function(){
     expect($scope).to.be.truely;
 
-    expect($scope.isNew).to.be.true;
-
     expect($scope.dismiss).to.be.a('function');
   });
 
   it('should close modal when clicked on a presentation',function(){
     var presentationId = 'presentationId';
     var presentationName = 'presentationName';
-    $rootScope.$broadcast('risevision.schedules.presentation-selected',
+    $scope.$broadcast('risevision.schedules.presentation-selected',
       presentationId, presentationName);
 
-    expect(itemUpdated).to.be.true;
-    $modalInstanceCloseSpy.should.have.been.called;
+    $modalInstanceCloseSpy.should.have.been.calledWith([presentationId, presentationName]);
   });
 
   it('should dismiss modal when clicked on close with no action',function(){
     $scope.dismiss();
 
-    expect(itemUpdated).to.be.false;
-    $modalInstanceCloseSpy.should.have.been.called;
+    $modalInstanceDismissSpy.should.have.been.called;
   });
 
 });

@@ -6,7 +6,7 @@ var SchedulesListPage = require('./pages/schedulesListPage.js');
 var ScheduleAddPage = require('./pages/scheduleAddPage.js');
 var PlaylistPage = require('./pages/playlistPage.js');
 var helper = require('rv-common-e2e').helper;
-var UrlModalPage = require('./pages/urlModalPage.js');
+var PlaylistItemModalPage = require('./pages/playlistItemModalPage.js');
 
 browser.driver.manage().window().setSize(1024, 768);
 describe('Add URL to a schedule ' +
@@ -18,7 +18,7 @@ describe('Add URL to a schedule ' +
   var schedulesListPage;
   var scheduleAddPage;
   var playlistPage;
-  var urlModalPage;
+  var playlistItemModalPage;
 
   before(function (){
     homepage = new HomePage();
@@ -26,7 +26,7 @@ describe('Add URL to a schedule ' +
     scheduleAddPage = new ScheduleAddPage();
     playlistPage = new PlaylistPage();
     commonHeaderPage = new CommonHeaderPage();
-    urlModalPage = new UrlModalPage();
+    playlistItemModalPage = new PlaylistItemModalPage();
 
     homepage.get();
     //wait for spinner to go away.
@@ -43,8 +43,8 @@ describe('Add URL to a schedule ' +
       scheduleAddPage.getAddPlaylistItemButton().click();
       scheduleAddPage.getAddUrlItemButton().click();
 
-      urlModalPage.getUrlInput().sendKeys('http://risevision.com/content1.html');
-      urlModalPage.getUpdateButton().click();
+      playlistItemModalPage.getUrlInput().sendKeys('http://risevision.com/content1.html');
+      playlistItemModalPage.getSaveButton().click();
       
       // wait for transitions
       browser.sleep(500);
@@ -52,8 +52,8 @@ describe('Add URL to a schedule ' +
       scheduleAddPage.getAddPlaylistItemButton().click();
       scheduleAddPage.getAddUrlItemButton().click();
 
-      urlModalPage.getUrlInput().sendKeys('http://risevision.com/content2.html');
-      urlModalPage.getUpdateButton().click();
+      playlistItemModalPage.getUrlInput().sendKeys('http://risevision.com/content2.html');
+      playlistItemModalPage.getSaveButton().click();
     });
 
     describe('Should manage playlist items', function () {
@@ -84,33 +84,34 @@ describe('Add URL to a schedule ' +
         expect(scheduleAddPage.getPlaylistItems().get(1).getText()).to.eventually.contain('content2.html');
       });
       
-      it('should expand/retract properties', function () {
-        playlistPage.getExpandButtons().get(0).click();
-                
-        helper.wait(playlistPage.getItemNameTextboxes().get(0), 'Item Name Text Box');
-        
-        expect(playlistPage.getItemNameTextboxes().get(0).isDisplayed()).to.eventually.be.true;
-        expect(playlistPage.getRemoveButtons().get(0).isDisplayed()).to.eventually.be.true;
-
-        playlistPage.getExpandButtons().get(0).click();
-        helper.waitDisappear(playlistPage.getItemNameTextboxes().get(0), 'Item Name Text Box');
-        
-        expect(playlistPage.getItemNameTextboxes().get(0).isDisplayed()).to.eventually.be.false;
-        expect(playlistPage.getRemoveButtons().get(0).isDisplayed()).to.eventually.be.false;
-      });
-      
       it('should remove item', function (done) {
-        playlistPage.getExpandButtons().get(0).click();        
+        playlistPage.getRemoveButtons().get(0).click();
 
-        helper.clickWhenClickable(playlistPage.getRemoveButtons().get(0), "Remove Item Button").then(function () {
-          helper.clickWhenClickable(playlistPage.getRemoveItemButton(), "Remove Item Confirm Button").then(function () {
-            expect(scheduleAddPage.getPlaylistItems().count()).to.eventually.equal(1);
-            
-            done();
-          });
+        helper.clickWhenClickable(playlistPage.getRemoveItemButton(), "Remove Item Confirm Button").then(function () {
+          expect(scheduleAddPage.getPlaylistItems().count()).to.eventually.equal(1);
+          
+          done();
         });
       });
 
+      it('should open properties', function () {
+        scheduleAddPage.getPlaylistItems().get(0).element(by.css('td')).click();
+        
+        helper.wait(playlistItemModalPage.getPlaylistItemModal(), 'Edit Playist Modal');
+        
+        expect(playlistItemModalPage.getPlaylistItemModal().isDisplayed()).to.eventually.be.true;
+        expect(playlistItemModalPage.getModalTitle().getText()).to.eventually.equal('Edit Playlist Item');
+      });
+      
+      it('should close properties', function() {
+        playlistItemModalPage.getSaveButton().click();
+        
+        // wait for transitions
+        browser.sleep(500);
+        
+        expect(playlistItemModalPage.getPlaylistItemModal().isElementPresent()).to.eventually.be.false;
+      });
+      
     });
   });
 });

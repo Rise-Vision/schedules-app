@@ -1,9 +1,28 @@
 'use strict';
 
 angular.module('risevision.schedulesApp.services')
-  .factory('playlistFactory', ['scheduleFactory',
-    function (scheduleFactory) {
+  .constant('TYPE_URL', 'url')
+  .constant('TYPE_PRESENTATION', 'presentation')
+  .factory('playlistFactory', ['scheduleFactory', 'TYPE_URL', 
+    'TYPE_PRESENTATION',
+    function (scheduleFactory, TYPE_URL, TYPE_PRESENTATION) {
+      var DEFAULT_DURATION = 10;
       var factory = {};
+
+      factory.getNewPresentationItem = function() {
+        return {
+          duration: DEFAULT_DURATION,
+          type: TYPE_PRESENTATION
+        };
+      };
+
+      factory.getNewUrlItem = function() {
+        return {
+          duration: DEFAULT_DURATION,
+          type: TYPE_URL,
+          name: 'URL Item'
+        };
+      };
 
       var _getPlaylist = function () {
         return scheduleFactory.schedule.content;
@@ -11,6 +30,10 @@ angular.module('risevision.schedulesApp.services')
 
       var _getItemIndex = function (playlistItem) {
         return _getPlaylist() ? _getPlaylist().indexOf(playlistItem) : -1;
+      };
+      
+      factory.isNew = function (playlistItem) {
+        return _getItemIndex(playlistItem) === -1;
       };
 
       factory.updatePlaylistItem = function (playlistItem) {

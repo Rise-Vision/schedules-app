@@ -22,7 +22,7 @@
 
       <tbody>
       <tr data-ng-click="toggleObject.item = $index; select(presentation.id, presentation.name);" data-ng-class="{'active' : toggleObject.item == $index}" ng-repeat="presentation in presentations.list">
-        <td>{{presentation.name}}</td>
+        <td id="presentationName">{{presentation.name}}</td>
         <td class="text-right"><span ng-class="{'text-danger': presentation.revisionStatus==1}">{{presentation.revisionStatus | presentationStatus}}</span></td>
       </tr>
       </tbody>
