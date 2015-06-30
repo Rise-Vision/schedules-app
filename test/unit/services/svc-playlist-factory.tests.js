@@ -133,7 +133,7 @@ describe('service: playlistFactory:', function() {
     expect(playlistFactory.canPlaylistItemMoveUp(playlistItem2)).to.be.true;
   }); 
   
-  it('movePlaylistItemUp/Down: ', function() {
+  xit('movePlaylistItemUp/Down: ', function() {
     playlistFactory.movePlaylistItemDown(playlistItem0);
     
     expect(playlist.indexOf(playlistItem0)).to.equal(1);
