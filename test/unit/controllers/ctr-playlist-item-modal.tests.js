@@ -106,7 +106,7 @@ describe('controller: Playlist Item Modal', function() {
   });
   
   it('should populate url on picked event',function(){
-    $scope.$broadcast('picked', 'some_url');
+    $scope.$broadcast('picked', ['some_url']);
     $scope.$digest();
     expect($scope.playlistItem.objectReference).to.equal('some_url');
   });
