@@ -72,10 +72,10 @@ angular.module('risevision.schedulesApp.services')
       };
 
       var _moveItem = function (playlistItem, newIndex) {
-        var index = _getItemIndex(playlistItem);
-        var playlist = factory.getPlaylist();
+        factory.removePlaylistItem(playlistItem);
+        var newItem = angular.copy(playlistItem);
 
-        playlist.splice(newIndex, 0, playlist.splice(index, 1)[0]);
+        factory.getPlaylist().splice(newIndex, 0, newItem);
       };
 
       factory.movePlaylistItemDown = function (playlistItem) {
