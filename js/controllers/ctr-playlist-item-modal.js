@@ -10,7 +10,7 @@ angular.module('risevision.schedulesApp.controllers')
       $scope.isNew = playlistFactory.isNew(playlistItem);
 
       $scope.$on('picked', function (event, url) {
-        $scope.playlistItem.objectReference = url;
+        $scope.playlistItem.objectReference = url[0];
       });
 
       $scope.selectPresentation = function () {

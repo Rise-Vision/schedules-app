@@ -201,8 +201,8 @@ describe('controller: Presentation List', function() {
 
         expect($scope.presentations.list).to.have.length(40);
 
-        expect($scope.search.sortBy).to.equal('changeDate');
-        expect($scope.search.reverse).to.be.true;
+        expect($scope.search.sortBy).to.equal('name');
+        expect($scope.search.reverse).to.be.false;
 
         done();
       },10);
