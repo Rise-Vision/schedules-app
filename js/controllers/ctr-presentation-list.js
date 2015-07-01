@@ -8,9 +8,9 @@ angular.module('risevision.schedulesApp.controllers')
       $scope.presentations = new BaseList(DB_MAX_COUNT);
 
       $scope.search = {
-        sortBy: 'changeDate',
+        sortBy: 'name',
         count: DB_MAX_COUNT,
-        reverse: true
+        reverse: false
       };
 
       $scope.filterConfig = {
