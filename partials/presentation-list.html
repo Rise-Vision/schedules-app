@@ -8,7 +8,7 @@
       <table id="presentationListTable" class="table-2 table-hover">
         <thead>
           <tr>
-            <th id="tableHeaderName" ng-click="sortBy('name')">
+            <th id="tableHeaderName" ng-click="sortBy('name')" class="clickable">
               Name
               <!-- ngIf: search.sortBy == 'name' -->
               <i ng-if="search.sortBy == 'name'" class="fa" ng-class="{false: 'fa-long-arrow-up', true: 'fa-long-arrow-down'}[search.reverse]"></i>
