@@ -4,6 +4,7 @@ var PlaylistPage = function() {
   var moveDownButtons = element.all(by.id('moveDownButton'));
   var removeButtons = element.all(by.id('removeButton'));
   var removeItemButton = element(by.id("confirmForm")).element(by.buttonText('Remove'));
+  var duplicateItemButton = element.all(by.id('duplicateButton'));
 
   this.getMoveUpButtons = function() {
     return moveUpButtons;
@@ -19,6 +20,10 @@ var PlaylistPage = function() {
   
   this.getRemoveItemButton = function() {
     return removeItemButton;
+  };
+  
+  this.getDuplicateItemButton = function() {
+    return duplicateItemButton;
   };
   
 };

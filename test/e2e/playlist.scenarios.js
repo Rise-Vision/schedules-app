@@ -93,6 +93,12 @@ describe('Add URL to a schedule ' +
           done();
         });
       });
+      
+      it('should duplicate item', function() {
+        playlistPage.getDuplicateItemButton().get(0).click();
+        
+        expect(scheduleAddPage.getPlaylistItems().count()).to.eventually.equal(2);
+      });
 
       it('should open properties', function () {
         scheduleAddPage.getPlaylistItems().get(0).element(by.css('td')).click();
