@@ -17,6 +17,6 @@
     .constant('LOCALES_SUFIX', '.json');
 
   angular.module('risevision.schedulesApp.config', [])
-    .value('VIEWER_URL', 'https://preview.risevision.com');
+    .value('VIEWER_URL', 'http://preview.risevision.com');
 
 })(angular);

@@ -68,7 +68,7 @@ describe('service: scheduleFactory:', function() {
         }
       }
     });
-    $provide.value('VIEWER_URL', 'https://rvaviewer-test.appspot.com');
+    $provide.value('VIEWER_URL', 'http://rvaviewer-test.appspot.com');
 
   }));
   var scheduleFactory, trackerCalled, updateSchedule, currentState;
@@ -262,7 +262,7 @@ describe('service: scheduleFactory:', function() {
     scheduleFactory.getSchedule("scheduleId")
       .then(function() {
         expect(scheduleFactory.getPreviewUrl()).to.be.ok;
-        expect(scheduleFactory.getPreviewUrl()).to.equal('https://rvaviewer-test.appspot.com/?type=schedule&id=scheduleId&showui=false');
+        expect(scheduleFactory.getPreviewUrl()).to.equal('http://rvaviewer-test.appspot.com/?type=schedule&id=scheduleId&showui=false');
 
         done();
       })
