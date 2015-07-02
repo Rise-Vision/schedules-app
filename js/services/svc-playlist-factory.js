@@ -30,7 +30,7 @@ angular.module('risevision.schedulesApp.services')
       };
 
       var _getItemIndex = function (playlistItem) {
-        return factory.getPlaylist() ? 
+        return factory.getPlaylist() ?
           factory.getPlaylist().indexOf(playlistItem) : -1;
       };
 
@@ -48,6 +48,16 @@ angular.module('risevision.schedulesApp.services')
         var index = _getItemIndex(playlistItem);
         if (index !== -1) {
           factory.getPlaylist().splice(index, 1);
+        }
+      };
+
+      factory.duplicatePlaylistItem = function (playlistItem) {
+        var index = _getItemIndex(playlistItem);
+        if (index !== -1) {
+          var newPlaylistItem = angular.copy(playlistItem);
+          newPlaylistItem.name = 'Copy of ' + newPlaylistItem.name;
+
+          factory.getPlaylist().splice(index + 1, 0, newPlaylistItem);
         }
       };
 
