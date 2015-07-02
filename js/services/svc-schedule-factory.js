@@ -2,8 +2,9 @@
 
 angular.module('risevision.schedulesApp.services')
   .factory('scheduleFactory', ['$q', '$state', '$stateParams', 'schedule',
-    'scheduleTracker',
-    function ($q, $state, $stateParams, schedule, scheduleTracker) {
+    'scheduleTracker', 'VIEWER_URL',
+    function ($q, $state, $stateParams, schedule, scheduleTracker,
+      VIEWER_URL) {
       var factory = {};
       var _scheduleId;
 
@@ -117,6 +118,14 @@ angular.module('risevision.schedulesApp.services')
           .finally(function () {
             factory.loadingSchedule = false;
           });
+      };
+
+      factory.getPreviewUrl = function () {
+        if (_scheduleId) {
+          return VIEWER_URL + '/?type=schedule&id=' + _scheduleId +
+            '&showui=false';
+        }
+        return null;
       };
 
       return factory;

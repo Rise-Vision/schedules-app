@@ -16,6 +16,7 @@
     .constant('LOCALES_PREFIX', 'locales/translation_')
     .constant('LOCALES_SUFIX', '.json');
 
-  angular.module('risevision.schedulesApp.config', []);
+  angular.module('risevision.schedulesApp.config', [])
+    .value('VIEWER_URL', 'https://preview.risevision.com');
 
 })(angular);
