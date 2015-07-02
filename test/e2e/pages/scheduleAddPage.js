@@ -9,6 +9,8 @@ var ScheduleAddPage = function() {
   var addPresentationItemButton = element(by.id('addPresentationItemButton'));
   var playlistItems = element.all(by.repeater('playlistItem in playlistItems'));
 
+  var previewButton = element(by.id('previewButton'));
+
   var saveButton = element(by.id('saveButton'));
   var cancelButton = element(by.id('cancelButton'));
   var deleteButton = element(by.id('deleteButton'));
@@ -25,6 +27,10 @@ var ScheduleAddPage = function() {
 
   this.getScheduleNameField = function() {
     return displayNameField;
+  };
+
+  this.getPreviewButton = function() {
+    return previewButton;
   };
 
   this.getSaveButton = function() {

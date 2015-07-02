@@ -68,6 +68,7 @@ describe('service: scheduleFactory:', function() {
         }
       }
     });
+    $provide.value('VIEWER_URL', 'https://rvaviewer-test.appspot.com');
 
   }));
   var scheduleFactory, trackerCalled, updateSchedule, currentState;
@@ -93,7 +94,8 @@ describe('service: scheduleFactory:', function() {
     expect(scheduleFactory.getSchedule).to.be.a('function');
     expect(scheduleFactory.addSchedule).to.be.a('function');
     expect(scheduleFactory.updateSchedule).to.be.a('function');
-    expect(scheduleFactory.deleteSchedule).to.be.a('function');    
+    expect(scheduleFactory.deleteSchedule).to.be.a('function'); 
+    expect(scheduleFactory.getPreviewUrl).to.be.a('function');  
   });
   
   it('newSchedule: should reset the schedule',function(){
@@ -252,6 +254,22 @@ describe('service: scheduleFactory:', function() {
         done();
       },10);
     });
+  });
+
+  it('getPreviewUrl: ', function(done) {
+    expect(scheduleFactory.getPreviewUrl()).to.not.be.ok;
+    
+    scheduleFactory.getSchedule("scheduleId")
+      .then(function() {
+        expect(scheduleFactory.getPreviewUrl()).to.be.ok;
+        expect(scheduleFactory.getPreviewUrl()).to.equal('https://rvaviewer-test.appspot.com/?type=schedule&id=scheduleId&showui=false');
+
+        done();
+      })
+      .then(null, function(e) {
+        done(e);
+      })
+      .then(null,done);
   });
 
 });

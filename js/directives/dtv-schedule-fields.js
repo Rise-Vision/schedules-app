@@ -1,12 +1,14 @@
 'use strict';
 
 angular.module('risevision.schedulesApp.directives')
-  .directive('scheduleFields', ['$modal', 'playlistFactory',
-    function ($modal, playlistFactory) {
+  .directive('scheduleFields', ['$modal', 'scheduleFactory', 'playlistFactory',
+    function ($modal, scheduleFactory, playlistFactory) {
       return {
         restrict: 'E',
         templateUrl: 'partials/schedule-fields.html',
         link: function ($scope) {
+          $scope.previewUrl = scheduleFactory.getPreviewUrl();
+
           var openPlaylistModal = function (playlistItem) {
             $modal.open({
               templateUrl: 'partials/playlist-item.html',

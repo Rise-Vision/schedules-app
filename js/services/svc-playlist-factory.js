@@ -30,7 +30,7 @@ angular.module('risevision.schedulesApp.services')
       };
 
       var _getItemIndex = function (playlistItem) {
-        return factory.getPlaylist() ? 
+        return factory.getPlaylist() ?
           factory.getPlaylist().indexOf(playlistItem) : -1;
       };
 

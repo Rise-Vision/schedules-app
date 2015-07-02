@@ -35,6 +35,10 @@ describe("In order to manage schedules " +
     expect(scheduleAddPage.getScheduleNameField().isPresent()).to.eventually.be.true;
   });
 
+  it('should not show Preview Button',function(){
+    expect(scheduleAddPage.getPreviewButton().isDisplayed()).to.eventually.be.false;
+  });
+
   it('should show Save Button',function(){
     expect(scheduleAddPage.getSaveButton().isPresent()).to.eventually.be.true;
   });
@@ -49,6 +53,7 @@ describe("In order to manage schedules " +
     scheduleAddPage.getSaveButton().click();
     helper.wait(scheduleAddPage.getDeleteButton(), 'Delete Button');
     expect(scheduleAddPage.getDeleteButton().isDisplayed()).to.eventually.be.true;
+    expect(scheduleAddPage.getPreviewButton().isDisplayed()).to.eventually.be.true;
   });
 
   after(function() {
