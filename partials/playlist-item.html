@@ -24,7 +24,7 @@
 
     <div class="form-group" ng-if="playlistItem.type === 'presentation'">
       <label class="control-label add-right">Presentation:</label>
-      <a class="clickable" ng-click="selectPresentation()">{{playlistItem.objectReference}}</a>
+      <a class="clickable" id="presentationName" ng-click="selectPresentation()" presentation-name="playlistItem.objectReference"></a>
     </div>
 
     <hr>

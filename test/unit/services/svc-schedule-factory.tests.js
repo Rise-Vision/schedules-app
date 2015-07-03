@@ -53,11 +53,6 @@ describe('service: scheduleFactory:', function() {
         trackerCalled = name;
       };
     });
-    $provide.service('$stateParams',function(){
-      return {
-        scheduleId: 'abcd1234'
-      }
-    });
     $provide.service('$state',function(){
       return {
         go : function(state, params){
@@ -88,7 +83,7 @@ describe('service: scheduleFactory:', function() {
     expect(scheduleFactory.schedule).to.be.truely;
     expect(scheduleFactory.loadingSchedule).to.be.false;
     expect(scheduleFactory.savingSchedule).to.be.false;
-    expect(scheduleFactory.submitError).to.not.be.truely;
+    expect(scheduleFactory.apiError).to.not.be.truely;
     
     expect(scheduleFactory.newSchedule).to.be.a('function');
     expect(scheduleFactory.getSchedule).to.be.a('function');
@@ -132,8 +127,8 @@ describe('service: scheduleFactory:', function() {
         done(result);
       })
       .then(null, function() {
-        expect(scheduleFactory.submitError).to.be.truely;
-        expect(scheduleFactory.submitError).to.equal("ERROR; could not get schedule");
+        expect(scheduleFactory.apiError).to.be.truely;
+        expect(scheduleFactory.apiError).to.equal("ERROR; could not get schedule");
 
         setTimeout(function() {
           expect(scheduleFactory.loadingSchedule).to.be.false;
@@ -159,7 +154,7 @@ describe('service: scheduleFactory:', function() {
         expect(trackerCalled).to.equal('Schedule Created');
         expect(scheduleFactory.savingSchedule).to.be.false;
         expect(scheduleFactory.loadingSchedule).to.be.false;
-        expect(scheduleFactory.submitError).to.not.be.ok;
+        expect(scheduleFactory.apiError).to.not.be.ok;
         
         done();
       },10);
@@ -179,7 +174,7 @@ describe('service: scheduleFactory:', function() {
         expect(scheduleFactory.savingSchedule).to.be.false;
         expect(scheduleFactory.loadingSchedule).to.be.false;
 
-        expect(scheduleFactory.submitError).to.be.ok;
+        expect(scheduleFactory.apiError).to.be.ok;
         done();
       },10);
     });
@@ -198,7 +193,7 @@ describe('service: scheduleFactory:', function() {
         expect(trackerCalled).to.equal('Schedule Updated');
         expect(scheduleFactory.savingSchedule).to.be.false;
         expect(scheduleFactory.loadingSchedule).to.be.false;
-        expect(scheduleFactory.submitError).to.not.be.ok;
+        expect(scheduleFactory.apiError).to.not.be.ok;
         done();
       },10);
     });
@@ -216,7 +211,7 @@ describe('service: scheduleFactory:', function() {
         expect(scheduleFactory.savingSchedule).to.be.false;
         expect(scheduleFactory.loadingSchedule).to.be.false;
 
-        expect(scheduleFactory.submitError).to.be.ok;
+        expect(scheduleFactory.apiError).to.be.ok;
         done();
       },10);
     });
@@ -232,7 +227,7 @@ describe('service: scheduleFactory:', function() {
 
       setTimeout(function(){
         expect(scheduleFactory.loadingSchedule).to.be.false;
-        expect(scheduleFactory.submitError).to.not.be.ok;
+        expect(scheduleFactory.apiError).to.not.be.ok;
         expect(trackerCalled).to.equal('Schedule Deleted');
         expect(currentState).to.equal('schedule.list');
         done();
@@ -250,7 +245,7 @@ describe('service: scheduleFactory:', function() {
         expect(currentState).to.be.empty;
         expect(trackerCalled).to.not.be.ok;
         expect(scheduleFactory.loadingSchedule).to.be.false;
-        expect(scheduleFactory.submitError).to.be.ok;
+        expect(scheduleFactory.apiError).to.be.ok;
         done();
       },10);
     });

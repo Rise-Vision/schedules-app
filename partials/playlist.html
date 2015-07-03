@@ -6,7 +6,8 @@
           <p class="remove-bottom"><strong>{{playlistItem.name}}</strong></p>
         </td>
         <td class="hidden-xs" ng-click="manage(playlistItem)">
-          <p class="text-muted remove-bottom ellipsed">{{playlistItem.objectReference}}</p>
+          <p class="text-muted remove-bottom ellipsed" id="presentationNameCell" ng-if="playlistItem.type === 'presentation'" presentation-name="playlistItem.objectReference"></p>
+          <p class="text-muted remove-bottom ellipsed" ng-if="playlistItem.type === 'url'">{{playlistItem.objectReference}}</p>
         </td>
         <td class="text-right">
           <div class="table-actions">

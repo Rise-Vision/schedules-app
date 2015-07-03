@@ -102,12 +102,14 @@ describe("In order to have presentation on a schedule " +
             expect(playlistItemModalPage.getPlaylistItemModal().isDisplayed()).to.eventually.be.true;
             expect(playlistItemModalPage.getModalTitle().getText()).to.eventually.equal('Add Playlist Item');
             expect(playlistItemModalPage.getNameTextbox().getAttribute('value')).to.eventually.equal(presentationItemName);
+            expect(playlistItemModalPage.getPresentationNameField().getText()).to.eventually.equal(presentationItemName);
           });
           
           it('should add the playlist item', function () {
             playlistItemModalPage.getSaveButton().click();
 
             expect(scheduleAddPage.getPlaylistItems().get(0).isDisplayed()).to.eventually.be.true;
+            expect(playlistPage.getPresentationNameCell().get(0).getText()).to.eventually.equal(presentationItemName);
           });
         });
 

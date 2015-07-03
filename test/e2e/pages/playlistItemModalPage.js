@@ -7,6 +7,8 @@ var PlaylistItemModalPage = function() {
   // url item fields
   var urlInput = element(by.id('url'));
   var storageSelectorIcon = element(by.css('.input-group-addon .btn-widget-icon-storage'));
+  // presentation item fields
+  var presentationNameField = element(by.css('#playlistItemModal #presentationName'));
 
   var saveButton = element(by.id('itemSave'));
 
@@ -32,6 +34,10 @@ var PlaylistItemModalPage = function() {
 
   this.getStorageSelectorIcon = function() {
     return storageSelectorIcon;
+  };
+  
+  this.getPresentationNameField = function() {
+    return presentationNameField;
   };
   
   this.getSaveButton = function() {
