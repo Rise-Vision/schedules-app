@@ -1,17 +1,16 @@
 'use strict';
 
 angular.module('risevision.schedulesApp.services')
-  .factory('scheduleFactory', ['$q', '$state', '$stateParams', 'schedule',
-    'scheduleTracker', 'VIEWER_URL',
-    function ($q, $state, $stateParams, schedule, scheduleTracker,
-      VIEWER_URL) {
+  .factory('scheduleFactory', ['$q', '$state', 'schedule', 'scheduleTracker',
+    'VIEWER_URL',
+    function ($q, $state, schedule, scheduleTracker, VIEWER_URL) {
       var factory = {};
       var _scheduleId;
 
       factory.schedule = {};
       factory.loadingSchedule = false;
       factory.savingSchedule = false;
-      factory.submitError = '';
+      factory.apiError = '';
 
       factory.newSchedule = function () {
         _scheduleId = undefined;
@@ -37,7 +36,7 @@ angular.module('risevision.schedulesApp.services')
             deferred.resolve();
           })
           .then(null, function (e) {
-            factory.submitError = e.message ? e.message : e.toString();
+            factory.apiError = e.message ? e.message : e.toString();
 
             deferred.reject();
           })
@@ -64,7 +63,7 @@ angular.module('risevision.schedulesApp.services')
             }
           })
           .then(null, function (e) {
-            factory.submitError = e.message ? e.message : e.toString();
+            factory.apiError = e.message ? e.message : e.toString();
           })
           .finally(function () {
             factory.loadingSchedule = false;
@@ -87,7 +86,7 @@ angular.module('risevision.schedulesApp.services')
             deferred.resolve();
           })
           .then(null, function (e) {
-            factory.submitError = e.message ? e.message : e.toString();
+            factory.apiError = e.message ? e.message : e.toString();
 
             deferred.reject();
           })
@@ -113,7 +112,7 @@ angular.module('risevision.schedulesApp.services')
             $state.go('schedule.list');
           })
           .then(null, function (e) {
-            factory.submitError = e.message ? e.message : e.toString();
+            factory.apiError = e.message ? e.message : e.toString();
           })
           .finally(function () {
             factory.loadingSchedule = false;
