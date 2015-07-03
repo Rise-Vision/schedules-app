@@ -7,54 +7,58 @@
   </div>
 
   <div class="modal-body">
-    <div class="form-group">
-      <label class="control-label">Name</label>
-      <input type="text" class="form-control" id="itemName" placeholder="Item Name" ng-model="playlistItem.name"> 
-    </div>
-    
-    <div class="form-group" ng-if="playlistItem.type === 'url'">
-      <label class="control-label">URL</label>
-      <div class="input-group custom-addon">
-        <input type="text" class="form-control" placeholder="URL" id="url" ng-model="playlistItem.objectReference">
-        <span class="input-group-addon">
-          <storage-selector company-id="{{companyId}}" type="single-file"></storage-selector>
-        </span>
+    <form role="form" name="playlistItemFields" novalidate>
+      <div class="form-group">
+        <label class="control-label">Name</label>
+        <input type="text" class="form-control" id="itemName" placeholder="Item Name" ng-model="playlistItem.name"> 
       </div>
-    </div>  
-
-    <div class="form-group" ng-if="playlistItem.type === 'presentation'">
-      <label class="control-label add-right">Presentation:</label>
-      <a class="clickable" id="presentationName" ng-click="selectPresentation()" presentation-name="playlistItem.objectReference"></a>
-    </div>
-
-    <hr>
-    <div class="form-group half-top">
-      <div class="row">
-        <div class="col-sm-4">
-          <label class="control-label">Duration</label>
-          <input type="text" class="form-control" id="itemDuration" ng-model="playlistItem.duration">
+      
+      <div class="form-group" ng-if="playlistItem.type === 'url'" ng-class="{'has-error': playlistItemFields.url.$touched && playlistItemFields.url.$invalid}" show-errors>
+        <label class="control-label">URL *</label>
+        <div class="input-group custom-addon">
+          <input type="text" class="form-control" placeholder="URL" id="url" name="url" ng-model="playlistItem.objectReference" required focus-me="isNew">
+          <span class="input-group-addon">
+            <storage-selector company-id="{{companyId}}" type="single-file"></storage-selector>
+          </span>
         </div>
-      </div><!--row-->
-    </div>
-    
-    <div class="form-group">
-      <label class="control-label">Timeline</label>
-      <div class="content-box-editable remove-bottom clickable">
-        <div class="label label-tag">Always</div>
-      </div>  
-    </div><!--form-group-->
+        <p class="text-danger" ng-show="playlistItemFields.url.$touched && playlistItemFields.url.$error.required">
+          Required
+        </p>
+      </div>
 
-    <div class="form-group">
-      <label class="control-label">Distribution</label>
-      <div class="content-box-editable remove-bottom clickable">
-        <div class="label label-tag">4 displays</div>
-      </div>  
-    </div><!--form-group-->
+      <div class="form-group" ng-if="playlistItem.type === 'presentation'">
+        <label class="control-label add-right">Presentation:</label>
+        <a class="clickable" id="presentationName" ng-click="selectPresentation()" presentation-name="playlistItem.objectReference"></a>
+      </div>
 
+      <hr>
+      <div class="form-group half-top">
+        <div class="row">
+          <div class="col-sm-4">
+            <label class="control-label">Duration</label>
+            <input type="text" class="form-control" id="itemDuration" ng-model="playlistItem.duration">
+          </div>
+        </div><!--row-->
+      </div>
+      
+      <div class="form-group">
+        <label class="control-label">Timeline</label>
+        <div class="content-box-editable remove-bottom clickable">
+          <div class="label label-tag">Always</div>
+        </div>  
+      </div><!--form-group-->
+
+      <div class="form-group">
+        <label class="control-label">Distribution</label>
+        <div class="content-box-editable remove-bottom clickable">
+          <div class="label label-tag">4 displays</div>
+        </div>  
+      </div><!--form-group-->
+    </form>
   </div><!--modal-body-->
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary btn-fixed-width" id="itemSave" ng-click="save()">{{isNew ? 'Add' : 'Apply'}} <i class="fa fa-white fa-check icon-right"></i></button>
+    <button type="button" class="btn btn-primary btn-fixed-width" id="itemSave" ng-click="save()" ng-disabled="playlistItemFields.$invalid">{{isNew ? 'Add' : 'Apply'}} <i class="fa fa-white fa-check icon-right"></i></button>
     <button type="button" class="btn btn-default btn-fixed-width" ng-click="dismiss()">Cancel <i class="fa fa-times icon-right"></i></button>
   </div>
 </div>

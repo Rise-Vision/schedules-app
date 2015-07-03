@@ -72,12 +72,20 @@ describe("Add URL to a schedule " +
           expect(playlistItemModalPage.getStorageSelectorIcon().isDisplayed()).to.eventually.be.true;
         });
 
+        it('Save button should be disabled', function () {
+          expect(playlistItemModalPage.getSaveButton().isEnabled()).to.eventually.be.false;
+        });
+
         describe('Given the user enters a URL',function () {
           before(function () {
             playlistItemModalPage.getUrlInput().sendKeys('http://risevision.com/content.html');
-            playlistItemModalPage.getSaveButton().click();
+          });
+          it('Save button should be enabled', function() {
+            expect(playlistItemModalPage.getSaveButton().isEnabled()).to.eventually.be.true;
           });
           it('should add the url item to the Playlist', function () {
+            playlistItemModalPage.getSaveButton().click();
+
             expect(scheduleAddPage.getPlaylistItems().get(0).isDisplayed()).to.eventually.be.true;
           });
         });
