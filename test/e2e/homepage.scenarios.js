@@ -2,8 +2,10 @@
 var expect = require('rv-common-e2e').expect;
 var HomePage = require('./pages/homepage.js');
 var CommonHeaderPage = require('rv-common-e2e').commonHeaderPage;
+var helper = require('rv-common-e2e').helper;
 
-browser.driver.manage().window().setSize(1024, 768);
+
+browser.driver.manage().window().setSize(1920, 1080);
 describe("In order to manage schedules " +
          "As a user " +
          "I would like to have access to the homepage of the schedules app", function() {
@@ -14,10 +16,9 @@ describe("In order to manage schedules " +
     homepage = new HomePage();
     commonHeaderPage = new CommonHeaderPage();
     homepage.get();
-    //wait for spinner to go away.
-    browser.wait(function() {
-      return element(by.css('.spinner-backdrop')).isDisplayed().then(function(result){return !result});
-    }, 20000);
+    helper.waitDisappear(commonHeaderPage.getLoader(), 'CH spinner loader').then(function () {
+      commonHeaderPage.signin();
+    });
   });
 
   it('should load',function(){
@@ -35,7 +36,7 @@ describe("In order to manage schedules " +
 
   it('should go to home when clicking on Schedules menu item',function(){
     commonHeaderPage.getCommonHeaderMenuItems().get(0).click();
-    expect(browser.getCurrentUrl()).to.eventually.equal(homepage.getUrl());
+    expect(browser.getCurrentUrl()).to.eventually.equal(homepage.getUrl()+"schedule/list?cid=ac57def2-834e-4ecd-8b91-44ca14524fd0");
   });
 
 });

@@ -71,8 +71,8 @@ describe('service: scheduleFactory:', function() {
     trackerCalled = undefined;
     currentState = undefined;
     updateSchedule = true;
-    
-    inject(function($injector){  
+
+    inject(function($injector){
       scheduleFactory = $injector.get('scheduleFactory');
     });
   });
@@ -90,7 +90,7 @@ describe('service: scheduleFactory:', function() {
     expect(scheduleFactory.addSchedule).to.be.a('function');
     expect(scheduleFactory.updateSchedule).to.be.a('function');
     expect(scheduleFactory.deleteSchedule).to.be.a('function'); 
-    expect(scheduleFactory.getPreviewUrl).to.be.a('function');  
+    expect(scheduleFactory.getPreviewUrl).to.be.a('function');
   });
   
   it('newSchedule: should reset the schedule',function(){

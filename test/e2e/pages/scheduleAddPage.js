@@ -4,9 +4,13 @@ var ScheduleAddPage = function() {
   var title = element(by.id('title'));
   var displayNameField = element(by.model('schedule.name'));
 
+  var distributionField = element(by.id('distributionField'));
+  var distributionFieldText = element(by.id('distributionFieldText'));
+
   var addPlaylistItemButton = element(by.id('addPlaylistItemButton'));
   var addUrlItemButton = element(by.id('addUrlItemButton'));
   var addPresentationItemButton = element(by.id('addPresentationItemButton'));
+
   var playlistItems = element.all(by.repeater('playlistItem in playlistItems'));
 
   var previewButton = element(by.id('previewButton'));
@@ -15,6 +19,10 @@ var ScheduleAddPage = function() {
   var cancelButton = element(by.id('cancelButton'));
   var deleteButton = element(by.id('deleteButton'));
   var deleteForeverButton = element(by.buttonText('Delete Forever'));
+
+  var errorBox = element(by.id('errorBox'));
+
+  var scheduleLoader = element(by.xpath('//div[@spinner-key="schedule-loader"]'));
 
 
   this.getSchedulesAppContainer = function() {
@@ -63,6 +71,22 @@ var ScheduleAddPage = function() {
 
   this.getPlaylistItems = function() {
     return playlistItems;
+  };
+
+  this.getDistributionField = function () {
+    return distributionField;
+  };
+
+  this.getDistributionFieldText = function () {
+    return distributionFieldText;
+  };
+
+  this.getErrorBox = function () {
+    return errorBox;
+  };
+
+  this.getScheduleLoader = function () {
+    return scheduleLoader;
   };
 
 };

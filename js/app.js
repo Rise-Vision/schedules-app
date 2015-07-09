@@ -10,6 +10,7 @@ angular.module('risevision.schedulesApp', [
   'risevision.common.components.focus-me',
   'risevision.common.components.confirm-instance',
   'risevision.common.components.analytics',
+  'risevision.common.components.distribution-selector',
   'risevision.widget.common.storage-selector',
   'ngTouch',
   'ui.bootstrap',
