@@ -9,6 +9,7 @@ angular.module('risevision.schedulesApp', [
   'risevision.common.components.scrolling-list',
   'risevision.common.components.focus-me',
   'risevision.common.components.confirm-instance',
+  'risevision.common.components.analytics',
   'risevision.widget.common.storage-selector',
   'ngTouch',
   'ui.bootstrap',
@@ -18,7 +19,6 @@ angular.module('risevision.schedulesApp', [
   'risevision.schedulesApp.controllers',
   'risevision.schedulesApp.filters',
   'risevision.schedulesApp.directives',
-  'risevision.common.analytics',
   'risevision.common.loading',
   'risevision.common.i18n'
 ])
