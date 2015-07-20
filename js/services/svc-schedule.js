@@ -4,7 +4,7 @@
 
 angular.module('risevision.schedulesApp.services')
   .constant('SCHEDULE_WRITABLE_FIELDS', [
-    'name', 'content'
+    'name', 'content', 'distribution', 'distributeToAll'
   ])
   .constant('SCHEDULE_SEARCH_FIELDS', [
     'name', 'id'

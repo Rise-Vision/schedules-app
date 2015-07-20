@@ -13,7 +13,7 @@
     <schedule-fields></schedule-fields>
     
     <div ng-show="factory.apiError" class="alert alert-danger" role="alert">
-      <strong translate>schedules-app.add.error </strong>{{factory.apiError}}
+      <strong>{{factory.errorMessage}}</strong> {{factory.apiError}}
     </div> 
 
     <div class="pull-right">      

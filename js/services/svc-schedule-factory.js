@@ -7,22 +7,31 @@ angular.module('risevision.schedulesApp.services')
       var factory = {};
       var _scheduleId;
 
-      factory.schedule = {};
-      factory.loadingSchedule = false;
-      factory.savingSchedule = false;
-      factory.apiError = '';
+      var _clearMessages = function () {
+        factory.loadingSchedule = false;
+        factory.savingSchedule = false;
+
+        factory.errorMessage = '';
+        factory.apiError = '';
+      };
 
       factory.newSchedule = function () {
         _scheduleId = undefined;
 
         factory.schedule = {
-          content: []
+          content: [],
+          distribution: []
         };
+
+        _clearMessages();
       };
+
+      factory.newSchedule();
 
       factory.getSchedule = function (scheduleId) {
         var deferred = $q.defer();
 
+        _clearMessages();
         //load the schedule based on the url param
         _scheduleId = scheduleId;
 
@@ -36,7 +45,7 @@ angular.module('risevision.schedulesApp.services')
             deferred.resolve();
           })
           .then(null, function (e) {
-            factory.apiError = e.message ? e.message : e.toString();
+            _showErrorMessage('get', e);
 
             deferred.reject();
           })
@@ -48,6 +57,8 @@ angular.module('risevision.schedulesApp.services')
       };
 
       factory.addSchedule = function () {
+        _clearMessages();
+
         //show loading spinner
         factory.loadingSchedule = true;
         factory.savingSchedule = true;
@@ -63,7 +74,7 @@ angular.module('risevision.schedulesApp.services')
             }
           })
           .then(null, function (e) {
-            factory.apiError = e.message ? e.message : e.toString();
+            _showErrorMessage('add', e);
           })
           .finally(function () {
             factory.loadingSchedule = false;
@@ -73,6 +84,8 @@ angular.module('risevision.schedulesApp.services')
 
       factory.updateSchedule = function () {
         var deferred = $q.defer();
+
+        _clearMessages();
 
         //show loading spinner
         factory.loadingSchedule = true;
@@ -86,7 +99,7 @@ angular.module('risevision.schedulesApp.services')
             deferred.resolve();
           })
           .then(null, function (e) {
-            factory.apiError = e.message ? e.message : e.toString();
+            _showErrorMessage('update', e);
 
             deferred.reject();
           })
@@ -99,6 +112,8 @@ angular.module('risevision.schedulesApp.services')
       };
 
       factory.deleteSchedule = function () {
+        _clearMessages();
+
         //show loading spinner
         factory.loadingSchedule = true;
 
@@ -112,7 +127,7 @@ angular.module('risevision.schedulesApp.services')
             $state.go('schedule.list');
           })
           .then(null, function (e) {
-            factory.apiError = e.message ? e.message : e.toString();
+            _showErrorMessage('delete', e);
           })
           .finally(function () {
             factory.loadingSchedule = false;
@@ -125,6 +140,12 @@ angular.module('risevision.schedulesApp.services')
             '&showui=false';
         }
         return null;
+      };
+
+      var _showErrorMessage = function (action, e) {
+        factory.errorMessage = 'Failed to ' + action + ' Schedule!';
+        factory.apiError = e.result.error.message ? e.result.error.message :
+          e.result.error.toString();
       };
 
       return factory;
