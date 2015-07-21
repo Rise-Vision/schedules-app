@@ -15,7 +15,7 @@ describe('service: scheduleFactory:', function() {
           if(updateSchedule){
             deferred.resolve({item: this._schedule});
           }else{
-            deferred.reject('ERROR; could not create schedule');
+            deferred.reject({result: {error: { message: 'ERROR; could not create schedule'}}});
           }
           return deferred.promise;
         },
@@ -24,7 +24,7 @@ describe('service: scheduleFactory:', function() {
           if(updateSchedule){
             deferred.resolve({item: this._schedule});
           }else{
-            deferred.reject('ERROR; could not update schedule');
+            deferred.reject({result: {error: { message: 'ERROR; could not update schedule'}}});
           }
           return deferred.promise;
         },
@@ -33,7 +33,7 @@ describe('service: scheduleFactory:', function() {
           if(updateSchedule){
             deferred.resolve({item: this._schedule});
           }else{
-            deferred.reject('ERROR; could not get schedule');
+            deferred.reject({result: {error: { message: 'ERROR; could not get schedule'}}});
           }
           return deferred.promise;
         },
@@ -42,7 +42,7 @@ describe('service: scheduleFactory:', function() {
           if(updateSchedule){
             deferred.resolve(scheduleId);
           }else{
-            deferred.reject('ERROR; could not delete schedule');
+            deferred.reject({result: {error: { message: 'ERROR; could not delete schedule'}}});
           }
           return deferred.promise;
         }
@@ -96,7 +96,7 @@ describe('service: scheduleFactory:', function() {
   it('newSchedule: should reset the schedule',function(){
     scheduleFactory.newSchedule();
     
-    expect(scheduleFactory.schedule).to.deep.equal({content: []});
+    expect(scheduleFactory.schedule).to.deep.equal({content: [], distribution: []});
     expect(scheduleFactory.scheduleId).to.not.be.truely;
   });
     
@@ -127,7 +127,9 @@ describe('service: scheduleFactory:', function() {
         done(result);
       })
       .then(null, function() {
-        expect(scheduleFactory.apiError).to.be.truely;
+        expect(scheduleFactory.errorMessage).to.be.ok;
+        expect(scheduleFactory.errorMessage).to.equal("Failed to get Schedule!");
+        expect(scheduleFactory.apiError).to.be.ok;
         expect(scheduleFactory.apiError).to.equal("ERROR; could not get schedule");
 
         setTimeout(function() {
@@ -154,6 +156,7 @@ describe('service: scheduleFactory:', function() {
         expect(trackerCalled).to.equal('Schedule Created');
         expect(scheduleFactory.savingSchedule).to.be.false;
         expect(scheduleFactory.loadingSchedule).to.be.false;
+        expect(scheduleFactory.errorMessage).to.not.be.ok;
         expect(scheduleFactory.apiError).to.not.be.ok;
         
         done();
@@ -174,6 +177,7 @@ describe('service: scheduleFactory:', function() {
         expect(scheduleFactory.savingSchedule).to.be.false;
         expect(scheduleFactory.loadingSchedule).to.be.false;
 
+        expect(scheduleFactory.errorMessage).to.be.ok;
         expect(scheduleFactory.apiError).to.be.ok;
         done();
       },10);
@@ -193,6 +197,7 @@ describe('service: scheduleFactory:', function() {
         expect(trackerCalled).to.equal('Schedule Updated');
         expect(scheduleFactory.savingSchedule).to.be.false;
         expect(scheduleFactory.loadingSchedule).to.be.false;
+        expect(scheduleFactory.errorMessage).to.not.be.ok;
         expect(scheduleFactory.apiError).to.not.be.ok;
         done();
       },10);
@@ -211,6 +216,7 @@ describe('service: scheduleFactory:', function() {
         expect(scheduleFactory.savingSchedule).to.be.false;
         expect(scheduleFactory.loadingSchedule).to.be.false;
 
+        expect(scheduleFactory.errorMessage).to.be.ok;
         expect(scheduleFactory.apiError).to.be.ok;
         done();
       },10);
@@ -227,6 +233,7 @@ describe('service: scheduleFactory:', function() {
 
       setTimeout(function(){
         expect(scheduleFactory.loadingSchedule).to.be.false;
+        expect(scheduleFactory.errorMessage).to.not.be.ok;
         expect(scheduleFactory.apiError).to.not.be.ok;
         expect(trackerCalled).to.equal('Schedule Deleted');
         expect(currentState).to.equal('schedule.list');
@@ -245,6 +252,8 @@ describe('service: scheduleFactory:', function() {
         expect(currentState).to.be.empty;
         expect(trackerCalled).to.not.be.ok;
         expect(scheduleFactory.loadingSchedule).to.be.false;
+        
+        expect(scheduleFactory.errorMessage).to.be.ok;
         expect(scheduleFactory.apiError).to.be.ok;
         done();
       },10);
