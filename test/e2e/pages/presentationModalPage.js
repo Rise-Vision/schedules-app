@@ -1,7 +1,7 @@
 'use strict';
 var PresentationModalPage = function() {
   var addPresentationModal = element(by.id('addPresentationModal'));
-  var modalTitle = element(by.css('.modal-title'));
+  var modalTitle = element(by.css('#addPresentationModal .modal-title'));
   var presentationSearchInput = element(by.id('presentationSearchInput'));
   var presentationListTable = element(by.id('presentationListTable'));
   var presentationItems = element.all(by.repeater('presentation in presentations.list'));

@@ -9,7 +9,7 @@ var PresentationModalPage = require('./pages/presentationModalPage.js');
 var PlaylistItemModalPage = require('./pages/playlistItemModalPage.js');
 var PlaylistPage = require('./pages/playlistPage.js');
 
-browser.driver.manage().window().setSize(1024, 768);
+browser.driver.manage().window().setSize(1920, 1080);
 describe("In order to have presentation on a schedule " +
   "As a user signed in " +
   "I would like to add presentations to a schedule ", function() {
@@ -33,10 +33,9 @@ describe("In order to have presentation on a schedule " +
 
     homepage.get();
     //wait for spinner to go away.
-    browser.wait(function() {
-      return element(by.css('.spinner-backdrop')).isDisplayed().then(function(result){return !result});
-    }, 20000);
-    commonHeaderPage.signin();
+    helper.waitDisappear(commonHeaderPage.getLoader(), 'CH spinner loader').then(function () {
+      commonHeaderPage.signin();
+    });
   });
 
   describe(" Given a user is adding a new schedule ", function() {
@@ -95,14 +94,18 @@ describe("In order to have presentation on a schedule " +
           before(function () {
             presentationModalPage.getPresentationNames().get(0).getText().then(function (text) {
               presentationItemName = text;
+              presentationModalPage.getPresentationItems().get(0).click();
             });
-            presentationModalPage.getPresentationItems().get(0).click();
           });
           it('should show the playlist item dialog', function () {
-            expect(playlistItemModalPage.getPlaylistItemModal().isDisplayed()).to.eventually.be.true;
-            expect(playlistItemModalPage.getModalTitle().getText()).to.eventually.equal('Add Playlist Item');
-            expect(playlistItemModalPage.getNameTextbox().getAttribute('value')).to.eventually.equal(presentationItemName);
-            expect(playlistItemModalPage.getPresentationNameField().getText()).to.eventually.equal(presentationItemName);
+            helper.wait(playlistItemModalPage.getPlaylistItemModal(), 'Playlist Item Modal').then(function () {
+              expect(playlistItemModalPage.getPlaylistItemModal().isDisplayed()).to.eventually.be.true;
+              expect(playlistItemModalPage.getModalTitle().getText()).to.eventually.equal('Add Playlist Item');
+              expect(playlistItemModalPage.getNameTextbox().getAttribute('value')).to.eventually.equal(presentationItemName);
+              helper.wait(playlistItemModalPage.getPresentationNameField(), 'Playlist Item Modal').then(function () {
+                expect(playlistItemModalPage.getPresentationNameField().getText()).to.eventually.equal(presentationItemName);
+              });
+            });
           });
           
           it('should add the playlist item', function () {

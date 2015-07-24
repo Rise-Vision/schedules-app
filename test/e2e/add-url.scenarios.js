@@ -7,7 +7,7 @@ var ScheduleAddPage = require('./pages/scheduleAddPage.js');
 var helper = require('rv-common-e2e').helper;
 var PlaylistItemModalPage = require('./pages/playlistItemModalPage.js');
 
-browser.driver.manage().window().setSize(1024, 768);
+browser.driver.manage().window().setSize(1920, 1080);
 describe("Add URL to a schedule " +
   "As a user signed in " +
   "I would like to add URLs to a schedule ", function() {
@@ -27,10 +27,9 @@ describe("Add URL to a schedule " +
 
     homepage.get();
     //wait for spinner to go away.
-    browser.wait(function() {
-      return element(by.css('.spinner-backdrop')).isDisplayed().then(function(result){return !result});
-    }, 20000);
-    commonHeaderPage.signin();
+    helper.waitDisappear(commonHeaderPage.getLoader(), 'CH spinner loader').then(function () {
+      commonHeaderPage.signin();
+    });
   });
 
   describe(" Given a user is adding a new schedule ", function() {

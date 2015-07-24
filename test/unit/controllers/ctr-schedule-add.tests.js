@@ -67,7 +67,7 @@ describe('controller: schedule add', function() {
     $scope.scheduleDetails.$valid = true;
     $scope.schedule = {id:123};
     $scope.save();
-    
+
     expect(scheduleAdded).to.be.true;
   });
 

@@ -3,8 +3,10 @@ var expect = require('rv-common-e2e').expect;
 var HomePage = require('./pages/homepage.js');
 var CommonHeaderPage = require('rv-common-e2e').commonHeaderPage;
 var SchedulesListPage = require('./pages/schedulesListPage.js');
+var helper = require('rv-common-e2e').helper;
 
-browser.driver.manage().window().setSize(1024, 768);
+
+browser.driver.manage().window().setSize(1920, 1080);
 describe("In order to manage schedules " +
   "As a user signed in " +
   "I would like to see a list of my schedules", function() {
@@ -20,10 +22,9 @@ describe("In order to manage schedules " +
 
     homepage.get();
     //wait for spinner to go away.
-    browser.wait(function() {
-      return element(by.css('.spinner-backdrop')).isDisplayed().then(function(result){return !result});
-    }, 20000);
-    commonHeaderPage.signin();
+    helper.waitDisappear(commonHeaderPage.getLoader(), 'CH spinner loader').then(function () {
+      commonHeaderPage.signin();
+    });
   });
 
   it('should show schedules list page',function(){
