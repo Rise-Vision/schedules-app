@@ -36,7 +36,7 @@ angular.module('risevision.schedulesApp', [
     })
 
     .state('schedule.root', {
-      template: '',
+      templateUrl: 'partials/landing-page.html',
       url: '/',
       controller: ['canAccessSchedules', '$state',
 
