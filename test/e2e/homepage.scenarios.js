@@ -51,12 +51,12 @@ describe("In order to manage schedules " +
       expect(homepage.getSchedulesImage().isPresent()).to.eventually.be.true;
     });
 
-    it('should show the manage schedules text', function () {
-      expect(homepage.getManageSchedulesText().getText()).to.eventually.equal('Schedule and deliver your content to an unlimited numbers of displays, anywhere, anytime.');
+    it('should show the schedules title text', function () {
+      expect(homepage.getAppTitleText().getText()).to.eventually.equal('Schedules');
     });
 
-    it('should show the schedules explanation text', function () {
-      expect(homepage.getSchedulesExplanationText().getText()).to.eventually.equal('Schedules is where you setup timelines and distributions lists for your playlists of Presentations and HTML pages for your Displays.');
+    it('should show the manage schedules text', function () {
+      expect(homepage.getManageSchedulesText().getText()).to.eventually.equal('Schedule delivery of HTML content to your digital signage displays, anywhere, anytime.');
     });
 
     it('should show the Sign Up link', function () {

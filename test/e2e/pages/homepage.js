@@ -7,7 +7,7 @@ var HomePage = function() {
 
   var schedulesImage = element(by.id('schedules-image'));
   var manageSchedulesText = element(by.id('manage-schedules-text'));
-  var schedulesExplanationText = element(by.id('schedules-explanation-text'));
+  var appTitleText = element(by.id('app-title'));
   var signUpText = element(by.id('sign-up-text'));
   var signInText = element(by.id('sign-in-text'));
   var signUpLink = element(by.id('sign-up-link'));
@@ -33,8 +33,8 @@ var HomePage = function() {
     return manageSchedulesText;
   };
 
-  this.getSchedulesExplanationText = function() {
-    return schedulesExplanationText;
+  this.getAppTitleText = function() {
+    return appTitleText;
   };
 
   this.getSignUpText = function() {
