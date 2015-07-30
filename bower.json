@@ -13,7 +13,7 @@
   ],
   "dependencies": {
     "rv-common-style": "https://github.com/Rise-Vision/common-style.git#feature/schedule",
-    "common-header": "https://github.com/Rise-Vision/common-header.git#v1.4.2",
+    "common-header": "https://github.com/Rise-Vision/common-header.git#v1.4.4",
     "angular-ui-select2": "~0.0.5",
     "angular": "~1.3.0",
     "angular-mocks": "~1.3.0",
@@ -25,7 +25,7 @@
     "ng-gapi-loader": "https://github.com/Rise-Vision/ng-gapi-loader",
     "lodash": "~2.4.1",
     "rv-loading": "https://github.com/Rise-Vision/rv-loading.git",
-    "rv-common-app-components": "https://github.com/Rise-Vision/common-app-components.git",
+    "rv-common-app-components": "https://github.com/Rise-Vision/common-app-components.git#feature/timeline",
     "rv-common-i18n": "https://github.com/Rise-Vision/common-i18n.git",
     "component-storage-selector": "https://github.com/Rise-Vision/component-storage-selector.git"
   },
@@ -33,7 +33,8 @@
     "angular": "~1.3.0",
     "angular-mocks": "~1.3.0",
     "jquery": "~2.1.1",
-    "angular-bootstrap": "~0.12.1",
-    "rv-common-style": "feature/schedule"
+    "angular-bootstrap": "~0.13.0",
+    "rv-common-style": "feature/schedule",
+    "rv-common-app-components": "feature/timeline"
   }
 }

@@ -7,6 +7,25 @@
 </div>
 
 <div class="form-group">
+  <label class="control-label">Timeline</label>
+  <timeline-textbox
+  time-defined = "schedule.timeDefined"
+  start-date = "schedule.startDate"
+  end-date = "schedule.endDate"
+  start-time = "schedule.startTime"
+  end-time = "schedule.endTime"
+  recurrence-type = "schedule.recurrenceType"
+  recurrence-frequency = "schedule.recurrenceFrequency"
+  recurrence-absolute = "schedule.recurrenceAbsolute"
+  recurrence-day-of-week = "schedule.recurrenceDayOfWeek"
+  recurrence-day-of-month = "schedule.recurrenceDayOfMonth"
+  recurrence-week-of-month = "schedule.recurrenceWeekOfMonth"
+  recurrence-month-of-year = "schedule.recurrenceMonthOfYear"
+  recurrence-days-of-week = "schedule.recurrenceDaysOfWeek"
+  ></timeline-textbox>
+</div><!--form-group-->
+
+<div class="form-group">
   <distribution-selector distribution="schedule.distribution" distribute-to-all="schedule.distributeToAll"></distribution-selector>
 </div>
 

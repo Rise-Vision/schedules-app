@@ -4,7 +4,11 @@
 
 angular.module('risevision.schedulesApp.services')
   .constant('SCHEDULE_WRITABLE_FIELDS', [
-    'name', 'content', 'distribution', 'distributeToAll'
+    'name', 'content', 'distribution', 'distributeToAll',
+    'timeDefined', 'startDate', 'endDate', 'startTime', 'endTime',
+    'recurrenceType', 'recurrenceFrequency', 'recurrenceAbsolute',
+    'recurrenceDayOfWeek', 'recurrenceDayOfMonth', 'recurrenceWeekOfMonth',
+    'recurrenceMonthOfYear', 'recurrenceDaysOfWeek'
   ])
   .constant('SCHEDULE_SEARCH_FIELDS', [
     'name', 'id'

@@ -35,7 +35,7 @@
       <div class="form-group half-top">
         <div class="row">
           <div class="col-sm-4">
-            <label class="control-label">Duration</label>
+            <label class="control-label">Duration (seconds)</label>
             <input type="text" class="form-control" id="itemDuration" ng-model="playlistItem.duration">
           </div>
         </div><!--row-->
@@ -43,17 +43,23 @@
       
       <div class="form-group">
         <label class="control-label">Timeline</label>
-        <div class="content-box-editable remove-bottom clickable">
-          <div class="label label-tag">Always</div>
-        </div>  
+        <timeline-textbox
+        time-defined = "playlistItem.timeDefined"
+        start-date = "playlistItem.startDate"
+        end-date = "playlistItem.endDate"
+        start-time = "playlistItem.startTime"
+        end-time = "playlistItem.endTime"
+        recurrence-type = "playlistItem.recurrenceType"
+        recurrence-frequency = "playlistItem.recurrenceFrequency"
+        recurrence-absolute = "playlistItem.recurrenceAbsolute"
+        recurrence-day-of-week = "playlistItem.recurrenceDayOfWeek"
+        recurrence-day-of-month = "playlistItem.recurrenceDayOfMonth"
+        recurrence-week-of-month = "playlistItem.recurrenceWeekOfMonth"
+        recurrence-month-of-year = "playlistItem.recurrenceMonthOfYear"
+        recurrence-days-of-week = "playlistItem.recurrenceDaysOfWeek"
+        ></timeline-textbox>
       </div><!--form-group-->
 
-      <div class="form-group">
-        <label class="control-label">Distribution</label>
-        <div class="content-box-editable remove-bottom clickable">
-          <div class="label label-tag">4 displays</div>
-        </div>  
-      </div><!--form-group-->
     </form>
   </div><!--modal-body-->
 

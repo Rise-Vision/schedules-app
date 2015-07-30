@@ -4,6 +4,8 @@ var ScheduleAddPage = function() {
   var title = element(by.id('title'));
   var displayNameField = element(by.model('schedule.name'));
 
+  var timelineField = element(by.id('timelineTextbox'));
+
   var distributionField = element(by.id('distributionField'));
   var distributionFieldText = element(by.id('distributionFieldText'));
 
@@ -71,6 +73,10 @@ var ScheduleAddPage = function() {
 
   this.getPlaylistItems = function() {
     return playlistItems;
+  };
+
+  this.getTimelineField = function () {
+    return timelineField;
   };
 
   this.getDistributionField = function () {
