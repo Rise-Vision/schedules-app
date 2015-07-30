@@ -1,13 +1,13 @@
 <div class="form-group" ng-class="{'has-error': !scheduleDetails.name.$pristine && scheduleDetails.name.$invalid}" show-errors>
   <label class="control-label">{{'schedules-app.fields.name.name' | translate}} *</label>
-  <input type="text" class="form-control" placeholder="Schedule Name" id="name" name="name" ng-model="schedule.name" required focus-me="!scheduleId">
+  <input type="text" class="form-control" placeholder="{{'schedules-app.fields.name.placeholder' | translate}}" id="name" name="name" ng-model="schedule.name" required focus-me="!scheduleId">
   <p class="text-danger" ng-show="!scheduleDetails.name.$pristine && scheduleDetails.name.$error.required" translate>
     schedules-app.fields.name.required
   </p>
 </div>
 
 <div class="form-group">
-  <label class="control-label">Timeline</label>
+  <label class="control-label" translate>schedules-app.fields.timeline</label>
   <timeline-textbox
   time-defined = "schedule.timeDefined"
   start-date = "schedule.startDate"
@@ -31,24 +31,24 @@
 
 <div class="add-top text-right">
   <div class="pull-left">
-    <h3 class="remove-top" style="line-height:33px;">Playlist</h3>
+    <h3 class="remove-top" style="line-height:33px;" translate>schedules-app.playlist.title</h3>
   </div>
   <div class="btn-group" dropdown>
-    <button id="addPlaylistItemButton" dropdown-toggle class="dropdown-toggle btn btn-primary">Add Playlist Item <i class="fa fa-plus icon-right"></i></button>
+    <button id="addPlaylistItemButton" dropdown-toggle class="dropdown-toggle btn btn-primary">{{'schedules-app.playlist.add-playlist-item' | translate}} <i class="fa fa-plus icon-right"></i></button>
     <ul class="dropdown-menu playlist-menu" role="menu">
       <li>
         <a class="clickable" id="addPresentationItemButton" ng-click="addPresentationItem()">
-          <span>Presentation</span>
+          <span translate>schedules-app.playlist.item.presentation</span>
         </a>
       </li>
       <li>
         <a class="clickable" id="addUrlItemButton" ng-click="addUrlItem()">
-          <span>URL</span>
+          <span translate>schedules-app.playlist.item.url</span>
         </a>
       </li>
     </ul>
   </div>
-  <a class="btn btn-default" id="previewButton" target="_blank" ng-href="{{previewUrl}}" ng-show="previewUrl">Preview <i class="fa fa-play icon-right"></i></a>
+  <a class="btn btn-default" id="previewButton" target="_blank" ng-href="{{previewUrl}}" ng-show="previewUrl">{{'schedules-app.actions.preview' | translate}} <i class="fa fa-play icon-right"></i></a>
 </div>
 
 <playlist playlist-items="schedule.content"></playlist>

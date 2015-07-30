@@ -27,6 +27,11 @@ describe('controller: Presentation List', function() {
         }
       }
     });
+    $provide.value('translateFilter', function(){
+      return function(key){
+        return key;
+      };
+    });
   }));
   var $scope, $broadcastSpy, returnPresentations, apiCount, result, $loading,$loadingStartSpy, $loadingStopSpy;
   beforeEach(function(){
