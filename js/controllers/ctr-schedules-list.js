@@ -39,8 +39,8 @@ angular.module('risevision.schedulesApp.controllers')
                 result.cursor);
             })
             .then(null, function (e) {
-              $scope.error =
-                'Failed to load schedules. Please try again later.';
+              $scope.error = $filter('translate')(
+                'schedules-app.list.error');
             })
             .finally(function () {
               $scope.loadingSchedules = false;

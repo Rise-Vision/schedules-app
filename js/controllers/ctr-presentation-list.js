@@ -1,8 +1,8 @@
 'use strict';
 angular.module('risevision.schedulesApp.controllers')
   .controller('presentationListController', ['$scope', '$rootScope',
-    'presentation', '$loading', 'BaseList',
-    function ($scope, $rootScope, presentation, $loading, BaseList) {
+    'presentation', '$loading', 'BaseList', '$filter',
+    function ($scope, $rootScope, presentation, $loading, BaseList, $filter) {
       var DB_MAX_COUNT = 40; //number of records to load at a time
 
       $scope.presentations = new BaseList(DB_MAX_COUNT);
@@ -14,7 +14,8 @@ angular.module('risevision.schedulesApp.controllers')
       };
 
       $scope.filterConfig = {
-        placeholder: 'Search Presentations',
+        placeholder: $filter('translate')(
+          'schedules-app.presentation-modal.search.placeholder'),
         id: 'presentationSearchInput'
       };
 
