@@ -36,9 +36,32 @@ describe("In order to have timeline on a schedule " +
     before(function () {
       schedulesListPage.getScheduleAddButton().click();
     });
+    
+    it('always checkbox should be checked', function() {
+      expect(scheduleAddPage.getTimelineAlwaysCheckbox().isSelected())
+        .to.eventually.be.true;
+        
+      expect(scheduleAddPage.getTimelineField().isDisplayed())
+        .to.eventually.be.false;
+    });
+    
+    it('should show timeline text box when checking off Always', function() {
+      scheduleAddPage.getTimelineAlwaysCheckbox().click();
+      
+      expect(scheduleAddPage.getTimelineField().isDisplayed())
+        .to.eventually.be.true;
+    });
+    
+    it('should hide timeline text box when checking Always', function() {
+      scheduleAddPage.getTimelineAlwaysCheckbox().click();
+      
+      expect(scheduleAddPage.getTimelineField().isDisplayed())
+        .to.eventually.be.false;
+    });
 
     describe('Given a user clicks on the Timeline field', function () {
       before(function () {
+        scheduleAddPage.getTimelineAlwaysCheckbox().click();
         scheduleAddPage.getTimelineField().click();
         helper.wait(timelineModalPage.getEditTimelineModal(), 'Edit Timeline Modal');
       });
@@ -61,45 +84,53 @@ describe("In order to have timeline on a schedule " +
           .to.eventually.be.true;
         expect(timelineModalPage.getAlldayCheckbox().isSelected())
           .to.eventually.be.true;
-          
-        expect(timelineModalPage.getRecurrenceCheckbox().isPresent())
+
+        expect(timelineModalPage.getDailyRecurrenceRadio().isDisplayed())
           .to.eventually.be.true;
-        expect(timelineModalPage.getRecurrenceCheckbox().isSelected())
-          .to.eventually.be.false;
-          
-        expect(timelineModalPage.getWeeklyRecurrenceRadio().isDisplayed())
-          .to.eventually.be.false;
+        expect(timelineModalPage.getDailyRecurrenceRadio().isSelected())
+          .to.eventually.be.true;                    
       });
 
       describe('Given the user selects a recurrence',function () {
-        before(function () {
-          timelineModalPage.getRecurrenceCheckbox().click();
-        });
         it('should show recurrence options', function () {
-          expect(timelineModalPage.getWeeklyRecurrenceRadio().isDisplayed())
+          expect(timelineModalPage.getDailyRecurrenceFrequency().isDisplayed())
             .to.eventually.be.true;
+          expect(timelineModalPage.getDailyRecurrenceFrequency().getAttribute("value"))
+            .to.eventually.equal("1");            
+
+          expect(timelineModalPage.getWeeklyRecurrenceFrequency().isPresent())
+            .to.eventually.be.false;
         });
         
         it('should show weekly recurrence fields', function () {
           timelineModalPage.getWeeklyRecurrenceRadio().click();
+
+          expect(timelineModalPage.getDailyRecurrenceFrequency().isPresent())
+            .to.eventually.be.false;
           
           expect(timelineModalPage.getWeeklyRecurrenceFrequency().isDisplayed())
             .to.eventually.be.true;
+          expect(timelineModalPage.getWeeklyRecurrenceFrequency().getAttribute("value"))
+            .to.eventually.equal("1");
         });
         
-        it('save should update timeline correctly', function() {
+        it('save should update timeline correctly', function(done) {
           timelineModalPage.getWeeklyRecurrenceRadio().click();
           timelineModalPage.getWeeklyRecurrenceFrequency().sendKeys("0");
           timelineModalPage.getApplyButton().click();
           
           helper.clickWhenClickable(scheduleAddPage.getTimelineField(), "Re-open timeline").then(function() {
-            expect(timelineModalPage.getWeeklyRecurrenceRadio().isDisplayed())
+            helper.wait(timelineModalPage.getEditTimelineModal(), 'Edit Timeline Modal');
+
+            expect(timelineModalPage.getWeeklyRecurrenceRadio().isSelected())
               .to.eventually.be.true;
-            expect(timelineModalPage.getWeeklyRecurrenceFrequency().isDisplayed())
+            expect(timelineModalPage.getWeeklyRecurrenceFrequency().isPresent())
               .to.eventually.be.true;
 
             expect(timelineModalPage.getWeeklyRecurrenceFrequency().getAttribute("value"))
-              .to.eventually.equal("10");            
+              .to.eventually.equal("10");
+              
+            done();        
           });
 
         });
