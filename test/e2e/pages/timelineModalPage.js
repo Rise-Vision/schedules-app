@@ -5,7 +5,9 @@ var TimelineModalPage = function() {
 
   var everydayCheckbox = element(by.model("timeline.everyDay"));
   var alldayCheckbox = element(by.model("timeline.allDay"));
-  var recurrenceCheckbox = element(by.model("timeline.hasRecurrence"));
+
+  var dailyRecurrenceRadio = element(by.id("Daily"));
+  var dailyRecurrenceFrequency = element(by.model("recurrence.daily.recurrenceFrequency"));
   
   var weeklyRecurrenceRadio = element(by.id("Weekly"));
   var weeklyRecurrenceFrequency = element(by.model("recurrence.weekly.recurrenceFrequency"));
@@ -29,9 +31,13 @@ var TimelineModalPage = function() {
     return alldayCheckbox;
   };
   
-  this.getRecurrenceCheckbox = function() {
-    return recurrenceCheckbox;
-  };
+  this.getDailyRecurrenceRadio = function() {
+    return dailyRecurrenceRadio;
+  }
+
+  this.getDailyRecurrenceFrequency = function() {
+    return dailyRecurrenceFrequency;
+  }
   
   this.getWeeklyRecurrenceRadio = function() {
     return weeklyRecurrenceRadio;
