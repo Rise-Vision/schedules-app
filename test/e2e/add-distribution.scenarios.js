@@ -37,8 +37,13 @@ describe("In order to have distribution on a schedule " +
       schedulesListPage.getScheduleAddButton().click();
     });
 
+    it('should show All Displays checkbox', function () {
+      expect(scheduleAddPage.getDistributionAllDisplaysCheckbox().isDisplayed()).to.eventually.be.true;
+    });
+
     describe('Given a user clicks on the Distribution field', function () {
       before(function () {
+        scheduleAddPage.getDistributionAllDisplaysCheckbox().click();
         scheduleAddPage.getDistributionField().click();
         helper.wait(distributionModalPage.getEditDistributionModal(), 'Edit Distribution Modal');
       });
@@ -51,9 +56,6 @@ describe("In order to have distribution on a schedule " +
         expect(distributionModalPage.getModalTitle().getText()).to.eventually.equal('Edit Distribution');
       });
 
-      it('should show All Displays checkbox', function () {
-        expect(distributionModalPage.getDistributionAllDisplaysCheckbox().isDisplayed()).to.eventually.be.true;
-      });
 
       it('should show a search box', function () {
         expect(distributionModalPage.getDistributionSearchInput().isDisplayed()).to.eventually.be.true;
@@ -118,38 +120,23 @@ describe("In order to have distribution on a schedule " +
 
       describe('Given the user chooses all displays',function () {
         before(function () {
-          helper.clickWhenClickable(scheduleAddPage.getDistributionField(), 'Click On Distribution Field').then(function () {
-            helper.wait(distributionModalPage.getEditDistributionModal(), 'Edit Distribution Modal').then(function () {
-              helper.waitDisappear(distributionModalPage.getDistributionListLoader()).then(function () {
-                distributionModalPage.getDistributionAllDisplaysCheckbox().click();
-                distributionModalPage.getApplyButton().click();
-              });
-            });
-          });
+          scheduleAddPage.getDistributionAllDisplaysCheckbox().click();
         });
-        it('should add all displays to the distribution', function () {
-          var expectResult = "All Displays";
-          expect(scheduleAddPage.getDistributionFieldText().getText()).to.eventually.equal(expectResult);
+        it('should hide displays field', function () {
+          expect(distributionModalPage.getEditDistributionModal().isPresent()).to.eventually.be.false;
         });
       });
 
-      xdescribe('Given the a display from the company is already set to a schedule and the user chooses all displays',function () {
+      describe('Given the a display from the company is already set to a schedule and the user chooses all displays',function () {
         before(function () {
           var scheduleName = 'TEST_E2E_SCHEDULE_WITH_DISTRIBUTION';
           scheduleAddPage.getScheduleNameField().sendKeys(scheduleName);
-          helper.clickWhenClickable(scheduleAddPage.getDistributionField(), 'Click On Distribution Field').then(function () {
-            helper.wait(distributionModalPage.getEditDistributionModal(), 'Edit Distribution Modal').then(function () {
-              helper.waitDisappear(distributionModalPage.getDistributionListLoader()).then(function () {
-                distributionModalPage.getApplyButton().click();
-                helper.clickWhenClickable(scheduleAddPage.getSaveButton()).then(function () {
-                });
-              });
-            });
+          helper.clickWhenClickable(scheduleAddPage.getSaveButton()).then(function () {
           });
         });
-        xit('should show a error saying anotehr user has already set a display to a schedule', function () {
-          var expectResultPart1 = "Failed to create Schedule! Another schedule (";
-          var expectResultPart2 = ") is set to be distributed to at least one display."
+        it('should show an error saying another user has already set a display to a schedule', function () {
+          var expectResultPart1 = "Failed to add Schedule! Another schedule (";
+          var expectResultPart2 = ") is also set to be distributed to"
           helper.wait(scheduleAddPage.getErrorBox(), 'Error box').then(function () {
             expect(scheduleAddPage.getErrorBox().getText()).to.eventually.string(expectResultPart1);
             expect(scheduleAddPage.getErrorBox().getText()).to.eventually.string(expectResultPart2);

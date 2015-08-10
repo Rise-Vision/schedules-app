@@ -3,7 +3,6 @@ var DistributionModalPage = function() {
   var editDistributionModal = element(by.id('distributionModal'));
   var modalTitle = element(by.css('.modal-title'));
 
-  var distributionAllDisplaysCheckbox = element(by.id('allDisplaysCheckbox'));
   var distributionSearchInput = element(by.id('displaySearchInput'));
   var distributionListTable = element(by.id('displayListTable'));
   var distributionItems = element.all(by.css('.display'));
@@ -21,9 +20,7 @@ var DistributionModalPage = function() {
     return modalTitle;
   };
 
-  this.getDistributionAllDisplaysCheckbox = function() {
-    return distributionAllDisplaysCheckbox;
-  };
+
 
   this.getDistributionSearchInput = function() {
     return distributionSearchInput;

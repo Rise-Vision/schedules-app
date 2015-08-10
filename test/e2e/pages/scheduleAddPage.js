@@ -2,11 +2,14 @@
 var ScheduleAddPage = function() {
   var schedulesAppContainer = element(by.css('.schedules-app'));
   var title = element(by.id('title'));
+
   var displayNameField = element(by.model('schedule.name'));
 
   var timelineAlwaysCheckbox = element(by.model('timeline.always'));
   var timelineField = element(by.id('timelineTextbox'));
 
+
+  var distributionAllDisplaysCheckbox = element(by.model("distributeToAll"));
   var distributionField = element(by.id('distributionField'));
   var distributionFieldText = element(by.id('distributionFieldText'));
 
@@ -98,6 +101,10 @@ var ScheduleAddPage = function() {
 
   this.getScheduleLoader = function () {
     return scheduleLoader;
+  };
+
+  this.getDistributionAllDisplaysCheckbox = function() {
+    return distributionAllDisplaysCheckbox;
   };
 
 };
