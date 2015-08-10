@@ -49,6 +49,7 @@ describe("In order to manage schedules " +
   it('should add schedule',function(){
     var scheduleName = 'TEST_E2E_SCHEDULE';
     scheduleAddPage.getScheduleNameField().sendKeys(scheduleName);
+    scheduleAddPage.getDistributionAllDisplaysCheckbox().click();
     scheduleAddPage.getSaveButton().click();
     helper.wait(scheduleAddPage.getDeleteButton(), 'Delete Button');
     expect(scheduleAddPage.getDeleteButton().isDisplayed()).to.eventually.be.true;
