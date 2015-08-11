@@ -66,7 +66,8 @@ angular.module('risevision.schedulesApp.services')
         schedule.add(factory.schedule)
           .then(function (resp) {
             if (resp && resp.item && resp.item.id) {
-              scheduleTracker('Schedule Created', resp.item.id, resp.item.name);
+              scheduleTracker('Schedule Created', resp.item.id, resp.item
+                .name);
 
               $state.go('schedule.details', {
                 scheduleId: resp.item.id

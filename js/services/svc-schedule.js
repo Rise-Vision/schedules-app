@@ -46,8 +46,8 @@ angular.module('risevision.schedulesApp.services')
           };
           $log.debug('list schedules called with', obj);
           coreAPILoader().then(function (coreApi) {
-            return coreApi.schedule.list(obj);
-          })
+              return coreApi.schedule.list(obj);
+            })
             .then(function (resp) {
               deferred.resolve(resp.result);
             })
@@ -67,8 +67,8 @@ angular.module('risevision.schedulesApp.services')
 
           $log.debug('get schedule called with', scheduleId);
           coreAPILoader().then(function (coreApi) {
-            return coreApi.schedule.get(obj);
-          })
+              return coreApi.schedule.get(obj);
+            })
             .then(function (resp) {
               $log.debug('get schedule resp', resp);
               deferred.resolve(resp.result);
@@ -90,8 +90,8 @@ angular.module('risevision.schedulesApp.services')
             'data': fields
           };
           coreAPILoader().then(function (coreApi) {
-            return coreApi.schedule.add(obj);
-          })
+              return coreApi.schedule.add(obj);
+            })
             .then(function (resp) {
               $log.debug('added schedule', resp);
               deferred.resolve(resp.result);
@@ -114,8 +114,8 @@ angular.module('risevision.schedulesApp.services')
 
           $log.debug('update schedule called with', scheduleId);
           coreAPILoader().then(function (coreApi) {
-            return coreApi.schedule.patch(obj);
-          })
+              return coreApi.schedule.patch(obj);
+            })
             .then(function (resp) {
               $log.debug('update schedule resp', resp);
               deferred.resolve(resp.result);
@@ -136,8 +136,8 @@ angular.module('risevision.schedulesApp.services')
 
           $log.debug('delete schedule called with', scheduleId);
           coreAPILoader().then(function (coreApi) {
-            return coreApi.schedule.delete(obj);
-          })
+              return coreApi.schedule.delete(obj);
+            })
             .then(function (resp) {
               $log.debug('delete schedule resp', resp);
               deferred.resolve(resp);
