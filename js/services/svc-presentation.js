@@ -31,7 +31,8 @@ angular.module('risevision.schedulesApp.services')
           var deferred = $q.defer();
 
           var query = search.query ?
-            createSearchQuery(PRESENTAION_SEARCH_FIELDS, search.query) : '';
+            createSearchQuery(PRESENTAION_SEARCH_FIELDS, search.query) :
+            '';
 
           var obj = {
             'companyId': userState.getSelectedCompanyId(),
@@ -42,8 +43,8 @@ angular.module('risevision.schedulesApp.services')
           };
           $log.debug('list presentations called with', obj);
           coreAPILoader().then(function (coreApi) {
-            return coreApi.presentation.list(obj);
-          })
+              return coreApi.presentation.list(obj);
+            })
             .then(function (resp) {
               deferred.resolve(resp.result);
             })
@@ -63,8 +64,8 @@ angular.module('risevision.schedulesApp.services')
 
           $log.debug('get presentation called with', presentationId);
           coreAPILoader().then(function (coreApi) {
-            return coreApi.presentation.get(obj);
-          })
+              return coreApi.presentation.get(obj);
+            })
             .then(function (resp) {
               $log.debug('get presentation resp', resp);
               deferred.resolve(resp.result);

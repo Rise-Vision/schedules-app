@@ -9,19 +9,19 @@ angular.module('risevision.schedulesApp.directives')
           id: '=presentationName'
         },
         link: function ($scope, element) {
-          $scope.$watch('id', function (id) {
-            if (id) {
-              $scope.presentation = presentationFactory.getPresentationCached(
-                $scope.id);
-            }
-          });
+            $scope.$watch('id', function (id) {
+              if (id) {
+                $scope.presentation = presentationFactory.getPresentationCached(
+                  $scope.id);
+              }
+            });
 
-          $scope.$watch('presentation.name', function (name) {
-            if (name) {
-              element.html(name);
-            }
-          });
-        } //link()
+            $scope.$watch('presentation.name', function (name) {
+              if (name) {
+                element.html(name);
+              }
+            });
+          } //link()
       };
     }
   ]);
