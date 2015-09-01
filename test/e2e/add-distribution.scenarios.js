@@ -38,11 +38,12 @@ describe("In order to have distribution on a schedule " +
 
     it('should show All Displays checkbox', function () {
       expect(scheduleAddPage.getDistributionAllDisplaysCheckbox().isDisplayed()).to.eventually.be.true;
+      expect(scheduleAddPage.getDistributionAllDisplaysCheckbox().isSelected())
+        .to.eventually.be.false;
     });
 
     describe('Given a user clicks on the Distribution field', function () {
       before(function () {
-        scheduleAddPage.getDistributionAllDisplaysCheckbox().click();
         scheduleAddPage.getDistributionField().click();
         helper.wait(distributionModalPage.getEditDistributionModal(), 'Edit Distribution Modal');
       });

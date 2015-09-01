@@ -20,6 +20,7 @@ angular.module('risevision.schedulesApp.services')
 
         factory.schedule = {
           content: [],
+          distributeToAll: false,
           distribution: []
         };
 

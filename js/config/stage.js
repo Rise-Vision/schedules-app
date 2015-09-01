@@ -16,7 +16,7 @@
     .constant('LOCALES_PREFIX', 'locales/translation_')
     .constant('LOCALES_SUFIX', '.json');
 
-  angular.module('risevision.editorApp.config', [])
+  angular.module('risevision.schedulesApp.config', [])
     .value('STORAGE_API_ROOT',
       'https://storage-dot-rvacore-test.appspot.com/_ah/api')
     .value('CORE_URL', 'https://rvacore-test.appspot.com/_ah/api') // override default core value

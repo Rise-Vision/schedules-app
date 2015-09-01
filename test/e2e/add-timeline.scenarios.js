@@ -74,10 +74,15 @@ describe("In order to have timeline on a schedule " +
       });
 
       it('should show timeline fields', function() {
-        expect(timelineModalPage.getEverydayCheckbox().isPresent())
+        expect(timelineModalPage.getStartDateTextbox().isDisplayed())
           .to.eventually.be.true;
-        expect(timelineModalPage.getEverydayCheckbox().isSelected())
+        expect(timelineModalPage.getStartDateTextbox().getAttribute('value'))
+          .to.eventually.be.ok;
+            
+        expect(timelineModalPage.getEndDateTextbox().isDisplayed())
           .to.eventually.be.true;
+        expect(timelineModalPage.getEndDateTextbox().getAttribute('value'))
+          .to.eventually.not.be.ok;
 
         expect(timelineModalPage.getAlldayCheckbox().isPresent())
           .to.eventually.be.true;
