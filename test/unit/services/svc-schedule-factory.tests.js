@@ -96,7 +96,7 @@ describe('service: scheduleFactory:', function() {
   it('newSchedule: should reset the schedule',function(){
     scheduleFactory.newSchedule();
     
-    expect(scheduleFactory.schedule).to.deep.equal({content: [], distribution: []});
+    expect(scheduleFactory.schedule).to.deep.equal({content: [], distributeToAll: false, distribution: []});
     expect(scheduleFactory.scheduleId).to.not.be.truely;
   });
     

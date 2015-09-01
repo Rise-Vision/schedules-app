@@ -3,7 +3,8 @@ var TimelineModalPage = function() {
   var editTimelineModal = element(by.id('timelineModal'));
   var modalTitle = element(by.css('.modal-title'));
 
-  var everydayCheckbox = element(by.model("timeline.everyDay"));
+  var startDateTextbox = element(by.model("timeline.startDate"));
+  var endDateTextbox = element(by.model("timeline.endDate"));
   var alldayCheckbox = element(by.model("timeline.allDay"));
 
   var dailyRecurrenceRadio = element(by.id("Daily"));
@@ -23,8 +24,12 @@ var TimelineModalPage = function() {
     return modalTitle;
   };
   
-  this.getEverydayCheckbox = function () {
-    return everydayCheckbox;
+  this.getStartDateTextbox = function() {
+    return startDateTextbox;
+  };
+  
+  this.getEndDateTextbox = function() {
+    return endDateTextbox;
   };
   
   this.getAlldayCheckbox = function() {
