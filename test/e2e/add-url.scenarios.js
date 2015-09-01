@@ -7,7 +7,6 @@ var ScheduleAddPage = require('./pages/scheduleAddPage.js');
 var helper = require('rv-common-e2e').helper;
 var PlaylistItemModalPage = require('./pages/playlistItemModalPage.js');
 
-browser.driver.manage().window().setSize(1920, 1080);
 describe("Add URL to a schedule " +
   "As a user signed in " +
   "I would like to add URLs to a schedule ", function() {

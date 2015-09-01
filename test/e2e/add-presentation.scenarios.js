@@ -9,7 +9,6 @@ var PresentationModalPage = require('./pages/presentationModalPage.js');
 var PlaylistItemModalPage = require('./pages/playlistItemModalPage.js');
 var PlaylistPage = require('./pages/playlistPage.js');
 
-browser.driver.manage().window().setSize(1920, 1080);
 describe("In order to have presentation on a schedule " +
   "As a user signed in " +
   "I would like to add presentations to a schedule ", function() {

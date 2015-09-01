@@ -6,7 +6,6 @@ var SchedulesListPage = require('./pages/schedulesListPage.js');
 var helper = require('rv-common-e2e').helper;
 
 
-browser.driver.manage().window().setSize(1920, 1080);
 describe("In order to manage schedules " +
   "As a user signed in " +
   "I would like to see a list of my schedules", function() {

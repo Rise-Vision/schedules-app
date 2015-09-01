@@ -7,7 +7,6 @@ var ScheduleAddPage = require('./pages/scheduleAddPage.js');
 var helper = require('rv-common-e2e').helper;
 var DistributionModalPage = require('./pages/distributionModalPage.js');
 
-browser.driver.manage().window().setSize(1920, 1080);
 describe("In order to have distribution on a schedule " +
   "As a user signed in " +
   "I would like to add distribution to a schedule ", function() {
