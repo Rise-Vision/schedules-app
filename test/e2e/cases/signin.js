@@ -1,9 +1,13 @@
 'use strict';
 var expect = require('rv-common-e2e').expect;
-var HomePage = require('./pages/homepage.js');
+var HomePage = require('./../pages/homepage.js');
 var CommonHeaderPage = require('rv-common-e2e').commonHeaderPage;
-var SchedulesListPage = require('./pages/schedulesListPage.js');
+var SchedulesListPage = require('./../pages/schedulesListPage.js');
 var helper = require('rv-common-e2e').helper;
+
+var SigninScenarios = function() {
+
+
 
 
 describe("In order to manage schedules " +
@@ -29,3 +33,6 @@ describe("In order to manage schedules " +
     expect(schedulesListPage.getTitle().isPresent()).to.eventually.be.true;
   });
 });
+};
+
+module.exports = SigninScenarios;
