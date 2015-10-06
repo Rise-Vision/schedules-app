@@ -1,11 +1,13 @@
 'use strict';
 var expect = require('rv-common-e2e').expect;
-var HomePage = require('./pages/homepage.js');
+var HomePage = require('./../pages/homepage.js');
 var CommonHeaderPage = require('rv-common-e2e').commonHeaderPage;
-var SchedulesListPage = require('./pages/schedulesListPage.js');
-var ScheduleAddPage = require('./pages/scheduleAddPage.js');
+var SchedulesListPage = require('./../pages/schedulesListPage.js');
+var ScheduleAddPage = require('./../pages/scheduleAddPage.js');
 var helper = require('rv-common-e2e').helper;
-var TimelineModalPage = require('./pages/timelineModalPage.js');
+var TimelineModalPage = require('./../pages/timelineModalPage.js');
+
+var AddTimelineScenarios = function() {
 
 describe("In order to have timeline on a schedule " +
   "As a user signed in " +
@@ -145,3 +147,5 @@ describe("In order to have timeline on a schedule " +
     });
   });
 });
+};
+module.exports = AddTimelineScenarios;
