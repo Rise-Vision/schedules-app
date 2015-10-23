@@ -1,4 +1,4 @@
-Schedules App [![Circle CI](https://circleci.com/gh/Rise-Vision/schedules-app.svg?style=svg)](https://circleci.com/gh/Rise-Vision/schedules-app)
+Schedules App [![Circle CI](https://circleci.com/gh/Rise-Vision/schedules-app.svg?style=svg)](https://circleci.com/gh/Rise-Vision/schedules-app) [![Coverage Status](https://coveralls.io/repos/Rise-Vision/schedules-app/badge.svg?branch=master&service=github)](https://coveralls.io/github/Rise-Vision/schedules-app?branch=master)
 ==============
 
 ## Introduction
