@@ -2,7 +2,7 @@
 var config = require('../config/config.json');
 
 var HomePage = function() {
-  var url = config.rootUrl + '/#/';
+  var url = config.rootUrl + '/#';
   var schedulesAppContainer = element(by.css('.schedules-app'));
 
   var schedulesImage = element(by.id('schedules-image'));

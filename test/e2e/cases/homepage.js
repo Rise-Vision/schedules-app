@@ -46,7 +46,7 @@ var HomePageScenarios = function() {
 
         commonHeaderPage.getCommonHeaderMenuItems().get(0).click();
         browser.sleep(10000);
-        expect(browser.getCurrentUrl()).to.eventually.equal(homepage.getUrl());
+        expect(browser.getCurrentUrl()).to.eventually.contain(homepage.getUrl());
       });
 
       it('should show the schedules image', function () {
