@@ -4,9 +4,8 @@
     <h1 translate>schedules-app.title</h1>
   </div>
 
-  <div class="global-actions">
-    <button ng-click="addSchedule()"
-      class="btn btn-lg btn-primary">     
+  <div class="global-actions" require-role="cp">
+    <button ng-click="addSchedule()" class="btn btn-lg btn-primary">     
       {{ 'schedules-app.actions.new' | translate }}
       <i class="fa fa-plus icon-right"></i> 
     </button>
@@ -27,13 +26,13 @@
     <div class="button-row">
       <p class="visible-xs text-right"><last-modified change-date="schedule.changeDate" changed-by="schedule.changedBy"></last-modified></p>
       <!-- Indicates delete or destructive action -->
-      <button id="deleteButton" type="button" class="btn btn-danger btn-fixed-width" ng-click="confirmDelete()">
+      <button id="deleteButton" type="button" class="btn btn-danger btn-fixed-width" ng-click="confirmDelete()" require-role="cp">
         {{'common.delete' | translate}} <i class="fa fa-white fa-trash-o icon-right"></i>
       </button>
       <div class="pull-right">
       <span class="hidden-xs add-right"><last-modified change-date="schedule.changeDate" changed-by="schedule.changedBy"></last-modified></span>
         <!-- Indicates a successful or positive action -->
-        <button type="submit" class="btn btn-primary btn-fixed-width" ng-click="save()" ng-disabled="scheduleDetails.$invalid || factory.savingSchedule">
+        <button type="submit" class="btn btn-primary btn-fixed-width" ng-click="save()" ng-disabled="scheduleDetails.$invalid || factory.savingSchedule" require-role="cp">
           {{ factory.savingSchedule ? ('common.saving' | translate) : ('common.save' | translate)}} 
           <i class="fa fa-check icon-right"></i>
         </button>
