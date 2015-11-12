@@ -16,6 +16,7 @@ angular.module('risevision.schedulesApp', [
     'ngTouch',
     'ui.bootstrap',
     'ui.bootstrap.showErrors',
+    'risevision.schedulesApp.partials',
     'risevision.schedulesApp.config',
     'risevision.schedulesApp.services',
     'risevision.schedulesApp.controllers',
@@ -30,14 +31,14 @@ angular.module('risevision.schedulesApp', [
       $urlRouterProvider.otherwise('/schedule/list');
 
       // Use $stateProvider to configure states.
-      $stateProvider
-
-        .state('schedule', {
+      $stateProvider.state('schedule', {
         template: '<div ui-view></div>'
       })
 
       .state('schedule.root', {
-        templateUrl: 'partials/landing-page.html',
+        templateProvider: ['$templateCache', function ($templateCache) {
+          return $templateCache.get('partials/landing-page.html');
+        }],
         url: '/',
         controller: ['canAccessSchedules', '$state',
 
@@ -51,7 +52,9 @@ angular.module('risevision.schedulesApp', [
 
       .state('schedule.list', {
         url: '/schedule/list',
-        templateUrl: 'partials/schedules-list.html',
+        templateProvider: ['$templateCache', function ($templateCache) {
+          return $templateCache.get('partials/schedules-list.html');
+        }],
         controller: 'schedulesList',
         resolve: {
           canAccessSchedules: ['canAccessSchedules',
@@ -64,7 +67,9 @@ angular.module('risevision.schedulesApp', [
 
       .state('schedule.details', {
         url: '/schedule/details/:scheduleId',
-        templateUrl: 'partials/schedule-details.html',
+        templateProvider: ['$templateCache', function ($templateCache) {
+          return $templateCache.get('partials/schedule-details.html');
+        }],
         controller: 'scheduleDetails',
         resolve: {
           scheduleInfo: ['canAccessSchedules', 'scheduleFactory',
@@ -81,7 +86,9 @@ angular.module('risevision.schedulesApp', [
 
       .state('schedule.add', {
         url: '/schedule/add',
-        templateUrl: 'partials/schedule-add.html',
+        templateProvider: ['$templateCache', function ($templateCache) {
+          return $templateCache.get('partials/schedule-add.html');
+        }],
         controller: 'scheduleAdd',
         resolve: {
           scheduleInfo: ['canAccessSchedules', 'scheduleFactory',
