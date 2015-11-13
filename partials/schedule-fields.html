@@ -34,7 +34,8 @@
   </div>
   <div class="btn-group" dropdown>
     <button id="addPlaylistItemButton" dropdown-toggle class="dropdown-toggle btn btn-primary">{{'schedules-app.playlist.add-playlist-item' | translate}} <i class="fa fa-plus icon-right"></i></button>
-    <ul class="dropdown-menu playlist-menu" role="menu">
+    <div class="dropdown-menu playlist-menu" role="menu">
+      <ul>
       <li>
         <a class="clickable" id="addPresentationItemButton" ng-click="addPresentationItem()">
           <span translate>schedules-app.playlist.item.presentation</span>
@@ -45,7 +46,8 @@
           <span translate>schedules-app.playlist.item.url</span>
         </a>
       </li>
-    </ul>
+      </ul>
+    </div>
   </div>
   <a class="btn btn-default" id="previewButton" target="_blank" ng-href="{{previewUrl}}" ng-show="previewUrl">{{'schedules-app.actions.preview' | translate}} <i class="fa fa-play icon-right"></i></a>
 </div>
