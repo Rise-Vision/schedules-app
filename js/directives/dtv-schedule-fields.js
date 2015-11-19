@@ -28,7 +28,7 @@ angular.module('risevision.schedulesApp.directives')
 
             $scope.addPresentationItem = function () {
               var modalInstance = $modal.open({
-                templateUrl: 'partials/presentation-modal.html',
+                templateUrl: 'presentation-selector/presentation-modal.html',
                 controller: 'selectPresentationModal',
                 resolve: {
                   playlistItem: playlistFactory.getNewPresentationItem

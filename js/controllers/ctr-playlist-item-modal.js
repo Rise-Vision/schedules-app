@@ -15,7 +15,7 @@ angular.module('risevision.schedulesApp.controllers')
 
       $scope.selectPresentation = function () {
         var modalInstance = $modal.open({
-          templateUrl: 'partials/presentation-modal.html',
+          templateUrl: 'presentation-selector/presentation-modal.html',
           controller: 'selectPresentationModal'
         });
 
