@@ -6,7 +6,7 @@ var PlaylistItemModalPage = function() {
   var durationTextbox = element(by.id('itemDuration'));
   // url item fields
   var urlInput = element(by.id('url'));
-  var storageSelectorIcon = element(by.css('.input-group-addon .btn-widget-icon-storage'));
+  var storageSelectorIcon = element(by.tagName('storage-selector'));
   // presentation item fields
   var presentationNameField = element(by.css('#playlistItemModal #presentationName'));
 

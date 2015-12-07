@@ -25,10 +25,17 @@ describe('controller: schedule add', function() {
       }
     });
 
+    $provide.service('scheduleTracker',function(){
+      return function(eventName,scheduleId, scheduleName) {
+        trackedEvent = eventName;
+      };
+    });
+
   }));
-  var $scope, scheduleFactory, $loading,$loadingStartSpy, $loadingStopSpy, scheduleAdded;
+  var $scope, scheduleFactory, $loading,$loadingStartSpy, $loadingStopSpy, scheduleAdded, trackedEvent;
   beforeEach(function(){
     scheduleAdded = false;
+    trackedEvent = undefined;
     
     inject(function($injector,$rootScope, $controller){
       $scope = $rootScope.$new();
@@ -69,7 +76,9 @@ describe('controller: schedule add', function() {
     $scope.schedule = {id:123};
     $scope.save();
 
+    expect(trackedEvent).to.equal('Save Schedule');
     expect(scheduleAdded).to.be.true;
+
   });
 
   it('should show/hide loading spinner if loading', function(done) {
