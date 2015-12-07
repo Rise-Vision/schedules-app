@@ -138,7 +138,7 @@ var AddDistributionScenarios = function() {
           });
           it('should show an error saying another user has already set a display to a schedule', function () {
             var expectResultPart1 = "Failed to add Schedule! Another schedule (";
-            var expectResultPart2 = ") is set to be distributed to"
+            var expectResultPart2 = ") is also set to be distributed to"
             helper.wait(scheduleAddPage.getErrorBox(), 'Error box').then(function () {
               expect(scheduleAddPage.getErrorBox().getText()).to.eventually.string(expectResultPart1);
               expect(scheduleAddPage.getErrorBox().getText()).to.eventually.string(expectResultPart2);

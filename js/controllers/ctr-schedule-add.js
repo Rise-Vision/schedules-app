@@ -2,7 +2,8 @@
 
 angular.module('risevision.schedulesApp.controllers')
   .controller('scheduleAdd', ['$scope', 'scheduleFactory', '$loading', '$log',
-    function ($scope, scheduleFactory, $loading, $log) {
+    'scheduleTracker',
+    function ($scope, scheduleFactory, $loading, $log, scheduleTracker) {
       $scope.factory = scheduleFactory;
       $scope.schedule = scheduleFactory.schedule;
 
@@ -15,6 +16,8 @@ angular.module('risevision.schedulesApp.controllers')
       });
 
       $scope.save = function () {
+        scheduleTracker('Save Schedule', scheduleFactory.schedule.id,
+          scheduleFactory.schedule.name);
         if (!$scope.scheduleDetails.$valid) {
           $log.error('form not valid: ', $scope.scheduleDetails.errors);
           return;

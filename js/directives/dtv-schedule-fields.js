@@ -2,12 +2,14 @@
 
 angular.module('risevision.schedulesApp.directives')
   .directive('scheduleFields', ['$modal', 'scheduleFactory', 'playlistFactory',
-    function ($modal, scheduleFactory, playlistFactory) {
+    'scheduleTracker',
+    function ($modal, scheduleFactory, playlistFactory, scheduleTracker) {
       return {
         restrict: 'E',
         templateUrl: 'partials/schedule-fields.html',
         link: function ($scope) {
             $scope.previewUrl = scheduleFactory.getPreviewUrl();
+            $scope.scheduleTracker = scheduleTracker;
 
             var openPlaylistModal = function (playlistItem) {
               $modal.open({
@@ -23,10 +25,15 @@ angular.module('risevision.schedulesApp.directives')
             };
 
             $scope.addUrlItem = function () {
+              scheduleTracker('Add URL Item to Schedule', scheduleFactory.schedule
+                .id, scheduleFactory.schedule.name);
               openPlaylistModal(playlistFactory.getNewUrlItem());
             };
 
             $scope.addPresentationItem = function () {
+              scheduleTracker('Add Presentation to Schedule',
+                scheduleFactory.schedule.id, scheduleFactory.schedule.name
+              );
               var modalInstance = $modal.open({
                 templateUrl: 'presentation-selector/presentation-modal.html',
                 controller: 'selectPresentationModal',
