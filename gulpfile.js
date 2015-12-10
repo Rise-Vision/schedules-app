@@ -78,7 +78,7 @@ gulp.task("lint", function() {
 });
 
 gulp.task("html", ["lint"], function () {
-  return gulp.src(['./index.html'])
+  return gulp.src(['./index0.html'])
      .pipe(usemin({
       html: [minifyHtml({empty: true})],
       js: [uglify({
@@ -86,6 +86,7 @@ gulp.task("html", ["lint"], function () {
          outSourceMap: false // source map generation doesn't seem to function correctly
        })]
     }))
+    .pipe(rename("index.html"))
     .pipe(gulp.dest("dist/"))
     .on('error',function(e){
     console.error(String(e));
